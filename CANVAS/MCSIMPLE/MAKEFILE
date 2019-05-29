@@ -1,0 +1,22 @@
+## Canvas - Simple IMultiCellCanvas Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\mcsimple.exe
+
+$(ODIR)\mcsimple.exe : $(ODIR)\mcsimple.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\mcsimple.exe $(ODIR)\mcsimple.obj
+
+$(ODIR)\mcsimple.obj: mcsimple.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\mcsimple.obj mcsimple.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

@@ -1,0 +1,61 @@
+/************************************************************
+/ Advanced Frame - Window Viewer Example
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include "winview.h"
+
+#ifdef IC_PM
+
+ICON       APP_ICON_ID       .\os2\app.ico
+ICON       WND_MAIN          .\os2\view.ico
+
+MENU WND_MAIN
+  BEGIN
+    SUBMENU        "~File"               , MI_FILE
+      BEGIN
+        MENUITEM   "E~xit"               , MI_EXIT
+      END
+    SUBMENU        "~Selected"           , MI_SELECTED
+      BEGIN
+        MENUITEM   "~Window Information" , MI_OPENINFO
+        MENUITEM   "~Child View"         , MI_OPENICON
+      END
+    MENUITEM       "~Refresh"            , MI_REFRESH
+  END
+
+MENU POPUP_MENU
+      BEGIN
+        MENUITEM   "~Window Information" , MI_OPENINFO
+        MENUITEM   "~Child View"         , MI_OPENICON
+      END
+
+#else
+
+APP_ICON_ID       ICON       .\win\app.ico
+WND_MAIN          ICON       .\win\view.ico
+
+WND_MAIN  MENUEX
+  BEGIN
+    POPUP         "&File"                  ,  MI_FILE
+      BEGIN
+        MENUITEM  "E&xit"                  ,  MI_EXIT
+      END
+    POPUP         "&Selected"              ,  MI_SELECTED
+      BEGIN
+        MENUITEM  "&Window Information"    ,  MI_OPENINFO
+        MENUITEM  "&Child View"            ,  MI_OPENICON
+      END
+    MENUITEM      "&Refresh"               ,  MI_REFRESH
+  END
+
+POPUP_MENU  MENUEX
+      BEGIN
+        MENUITEM  "&Window Information"    ,  MI_OPENINFO
+        MENUITEM  "&Child View"            ,  MI_OPENICON
+      END
+
+#endif
+

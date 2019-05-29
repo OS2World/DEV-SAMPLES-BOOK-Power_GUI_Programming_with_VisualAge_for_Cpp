@@ -1,0 +1,62 @@
+################################################################
+# FILE NAME: makefile                                          #
+#                                                              #
+# DESCRIPTION:                                                 #
+#   makefile for "service thread" demo program                 #
+#                                                              #
+# COPYRIGHT:                                                   #
+#   Licensed Materials - Property of Solution Frameworks       #
+#   Copyright (C) 1996, Solution Frameworks                    #
+#   All Rights Reserved                                        #
+################################################################
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+INC    = /I..\pi /I..\userevt /I..\signal
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+ALL :  CREATEDIR PI USEREVT SIGNAL $(ODIR)\piserve.exe
+
+$(ODIR)\piserve.exe : $(ODIR)\piserve.obj \
+                      $(ODIR)\service.obj \
+                      ..\pi\$(ODIR)\pi.obj \
+                      ..\userevt\$(ODIR)\userevt.obj \
+                      ..\signal\$(ODIR)\signal.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$@ $**
+
+$(ODIR)\piserve.obj : piserve.cpp \
+                      service.hpp \
+                      ..\pi\pi.hpp \
+                      ..\userevt\userevt.hpp \
+                      ..\signal\signal.hpp
+   icc $(CFLAGS) $(INC) /C+ /Fo$@ piserve.cpp
+
+$(ODIR)\service.obj : service.cpp \
+                      service.hpp \
+                      ..\userevt\userevt.hpp \
+                      ..\signal\signal.hpp
+   icc $(CFLAGS) $(INC) /C+ /Fo$@ service.cpp
+
+PI :
+  cd ..\pi
+  nmake
+  cd ..\piserve
+
+USEREVT :
+  cd ..\userevt
+  nmake
+  cd ..\piserve
+
+SIGNAL :
+  cd ..\signal
+  nmake
+  cd ..\piserve
+
+CREATEDIR:
+  @if not exist $(ODIR) md $(ODIR)
+
+

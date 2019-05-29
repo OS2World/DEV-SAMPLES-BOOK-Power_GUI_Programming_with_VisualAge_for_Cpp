@@ -1,0 +1,27 @@
+## Tool Bars - Custom Button Handler Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\cbuthdr.exe
+
+$(ODIR)\cbuthdr.exe :  $(ODIR)\cbuthdr.obj $(ODIR)\graphbut.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\cbuthdr.exe $(ODIR)\cbuthdr.obj $(ODIR)\graphbut.obj
+
+$(ODIR)\cbuthdr.obj: cbuthdr.cpp graphbut.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\cbuthdr.obj  cbuthdr.cpp
+
+$(ODIR)\graphbut.obj: graphbut.cpp graphbut.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\graphbut.obj  graphbut.cpp
+
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

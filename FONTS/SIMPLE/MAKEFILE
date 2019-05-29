@@ -1,0 +1,23 @@
+## Fonts  - Simple Font Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL :  CREATEDIR  $(ODIR)\simple.exe
+
+$(ODIR)\simple.exe : $(ODIR)\simple.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\simple.exe $(ODIR)\simple.obj
+
+$(ODIR)\simple.obj : simple.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\simple.obj simple.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

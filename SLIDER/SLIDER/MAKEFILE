@@ -1,0 +1,26 @@
+## Sliders - Linear Slider Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\slider.exe
+
+
+$(ODIR)\slider.exe : $(ODIR)\slider.obj $(ODIR)\tempview.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\slider.exe $(ODIR)\slider.obj $(ODIR)\tempview.obj
+
+$(ODIR)\slider.obj: slider.cpp tempview.hpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\slider.obj slider.cpp
+
+$(ODIR)\tempview.obj: tempview.cpp tempview.hpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\tempview.obj tempview.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

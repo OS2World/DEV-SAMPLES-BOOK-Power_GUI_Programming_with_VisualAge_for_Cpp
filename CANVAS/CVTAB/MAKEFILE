@@ -1,0 +1,22 @@
+## Canvas - Nested Canvas Tabbing Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\cvtab.exe
+
+$(ODIR)\cvtab.exe : $(ODIR)\cvtab.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\cvtab.exe $(ODIR)\cvtab.obj
+
+$(ODIR)\cvtab.obj: cvtab.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\cvtab.obj cvtab.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

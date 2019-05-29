@@ -1,0 +1,1 @@
+Select a drive from the following combo box to determine where your log file will be stored.  When you have completed this page, you can return to previous pages to check or change your answers.  If you are done with the SmartGuide, press the Done push button at the bottom of this page.

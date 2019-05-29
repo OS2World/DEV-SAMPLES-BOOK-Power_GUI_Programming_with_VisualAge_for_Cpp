@@ -1,0 +1,29 @@
+/************************************************************
+/ GUI Profile Viewer Example
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include "profview.h"
+
+#ifdef IC_PM /* OS/2 resources */
+ICON    INI_ICON_ID .\os2\ini.ico
+ICON    APP_ICON_ID .\os2\app.ico
+ICON    KEY_ICON_ID .\os2\key.ico
+
+ASSOCTABLE 100
+  BEGIN
+    "OS/2 Profile", "*.INI", ".\\os2\\ini.ico"
+  END
+
+#else  /* Windows resources */
+INI_ICON_ID ICON    .\win\ini.ico
+APP_ICON_ID ICON    .\win\app.ico
+KEY_ICON_ID ICON    .\win\key.ico
+
+
+#endif
+
+
+

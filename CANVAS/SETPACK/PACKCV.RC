@@ -1,0 +1,37 @@
+/************************************************************
+/ Canvas - ISetCanvas Pack Options
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include "packcv.h"
+
+#ifdef IC_PM /* OS/2 resources */
+
+#include <os2.h>
+
+BITMAP  ID_TOP_LEFT       .\os2\tl.bmp
+BITMAP  ID_TOP_CENTER     .\os2\tc.bmp
+BITMAP  ID_TOP_RIGHT      .\os2\tr.bmp
+BITMAP  ID_CENTER_LEFT    .\os2\cl.bmp
+BITMAP  ID_CENTER_CENTER  .\os2\cc.bmp
+BITMAP  ID_CENTER_RIGHT   .\os2\cr.bmp
+BITMAP  ID_BOTTOM_LEFT    .\os2\bl.bmp
+BITMAP  ID_BOTTOM_CENTER  .\os2\bc.bmp
+BITMAP  ID_BOTTOM_RIGHT   .\os2\br.bmp
+
+#else /* Windows resources */
+
+ID_TOP_LEFT       BITMAP  .\win\tl.bmp
+ID_TOP_CENTER     BITMAP  .\win\tc.bmp
+ID_TOP_RIGHT      BITMAP  .\win\tr.bmp
+ID_CENTER_LEFT    BITMAP  .\win\cl.bmp
+ID_CENTER_CENTER  BITMAP  .\win\cc.bmp
+ID_CENTER_RIGHT   BITMAP  .\win\cr.bmp
+ID_BOTTOM_LEFT    BITMAP  .\win\bl.bmp
+ID_BOTTOM_CENTER  BITMAP  .\win\bc.bmp
+ID_BOTTOM_RIGHT   BITMAP  .\win\br.bmp
+
+#endif
+

@@ -1,0 +1,34 @@
+## Menus - Loading a Resource Submenu
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+ORES=$(ODIR)\addsubmn.res
+RC=rc.exe -DIC_PM
+!else
+ODIR=.\win
+ORES=
+RC=irc.exe -Fo$(ODIR)\addsubmn.res
+!endif
+
+
+ALL :  CREATEDIR  $(ODIR)\addsubmn.exe
+
+$(ODIR)\addsubmn.exe :  $(ODIR)\addsubmn.obj $(ODIR)\addsubmn.res
+!ifdef IC_PM
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\addsubmn.exe $(ODIR)\addsubmn.obj
+   $(RC) $(ODIR)\addsubmn.res $(ODIR)\addsubmn.exe
+!else
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\addsubmn.exe $(ODIR)\addsubmn.obj $(ODIR)\addsubmn.res
+!endif
+
+$(ODIR)\addsubmn.obj : addsubmn.cpp addsubmn.h
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\addsubmn.obj addsubmn.cpp
+
+$(ODIR)\addsubmn.res : addsubmn.rc addsubmn.h
+   $(RC) -r addsubmn.rc $(ORES)
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

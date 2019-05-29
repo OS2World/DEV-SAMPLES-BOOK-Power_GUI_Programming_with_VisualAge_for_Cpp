@@ -1,0 +1,22 @@
+## Frame Window Basics - Frame Extension Sampler
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\frmextns.exe
+
+$(ODIR)\frmextns.exe : $(ODIR)\frmextns.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\frmextns.exe $(ODIR)\frmextns.obj
+
+$(ODIR)\frmextns.obj: frmextns.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\frmextns.obj frmextns.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

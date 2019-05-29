@@ -1,0 +1,25 @@
+## Getting Started - Simple Program, Version 1
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\start1.exe
+
+$(ODIR)\start1.exe : $(ODIR)\start1.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\start1.exe \
+       $(ODIR)\start1.obj
+
+$(ODIR)\start1.obj: start1.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\start1.obj start1.cpp
+   copy start1.cpp $(ODIR)
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

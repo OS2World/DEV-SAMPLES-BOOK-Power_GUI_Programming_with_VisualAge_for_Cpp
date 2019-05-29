@@ -1,0 +1,56 @@
+/************************************************************
+/ Edit Controls - Using an Edit Handler example
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include "logon.h"
+
+#ifdef IC_PM   /* OS/2 resources */
+
+#include <os2.h>
+/***********************************************/
+/* Menus                                       */
+/***********************************************/
+MENU MAIN_MENU
+BEGIN
+  SUBMENU  "~Options", MI_OPTIONS
+  BEGIN
+    MENUITEM "~Logon...",  MI_LOGON
+    MENUITEM SEPARATOR
+    MENUITEM "~Close",   SC_CLOSE,  MIS_SYSCOMMAND
+  END
+END
+
+#else  /* Windows resources */
+
+#include <windows.h>
+/***********************************************/
+/* Menus                                       */
+/***********************************************/
+MAIN_MENU  MENUEX
+BEGIN
+  POPUP     "&Options"     , MI_OPTIONS
+  BEGIN
+    MENUITEM  "&Logon..."  , MI_LOGON
+    MENUITEM  SEPARATOR
+    MENUITEM  "&Close"     , SC_CLOSE  /*MIS_SYSCOMMAND*/
+  END
+END
+#endif
+
+/***********************************************/
+/* String table                                */
+/***********************************************/
+STRINGTABLE
+  BEGIN
+    SI_LOGONPASSED , "Logon passed"
+    SI_LOGONFAILED , "Logon failed"
+    ID_LOGONIDPMT  , "Logon ID"
+    ID_LOGONID     , "PowerGUI"
+    ID_LOGONPWPMT  , "Password"
+    ID_LOGONPW     , "PowerGUI"
+    ID_OKBUTTON    , "Ok"
+  END
+

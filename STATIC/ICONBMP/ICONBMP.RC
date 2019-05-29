@@ -1,0 +1,19 @@
+/************************************************************
+/ Static Controls - Icon and Bitmap Example
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include "iconbmp.h"
+
+#ifdef IC_PM /* OS/2 resources */
+ICON    ID_CPPICON      .\os2\cpp.ico
+BITMAP  ID_CPPBITMAP    cpp.bmp
+
+#else  /* Windows resources */
+ID_CPPICON    ICON     .\win\cpp.ico
+ID_CPPBITMAP  BITMAP   cpp.bmp
+#endif
+
+

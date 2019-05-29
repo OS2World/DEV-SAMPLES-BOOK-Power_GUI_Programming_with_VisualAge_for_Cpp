@@ -1,0 +1,25 @@
+## Container Control - Dynamic Creation Of Objects
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\dynobj.exe
+
+$(ODIR)\dynobj.exe :  $(ODIR)\table.obj $(ODIR)\dynobj.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\dynobj.exe $(ODIR)\table.obj $(ODIR)\dynobj.obj
+
+$(ODIR)\dynobj.obj: dynobj.cpp table.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\dynobj.obj  dynobj.cpp
+
+$(ODIR)\table.obj: table.cpp table.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\table.obj  table.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

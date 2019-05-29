@@ -1,0 +1,34 @@
+/************************************************************
+/ Error Reporting - Exception Viewer Example
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include "exviewer.h"
+
+#ifdef IC_PM                                    // OS/2 resources
+MENU WND_MAIN                                   //Main Window Menu 
+  BEGIN
+    MENUITEM "~Throw Exception",   THROW_EXCEPTION
+  END
+
+STRINGTABLE
+  BEGIN
+    WND_MAIN,   "Exception Handling Example"    //Title bar text
+  END
+
+#else
+
+STRINGTABLE
+  BEGIN
+    WND_MAIN,   "Exception Handling Example"    //Title bar text
+  END
+
+
+WND_MAIN MENUEX                                 //Main Window Menu 
+  BEGIN
+    MENUITEM "&Throw Exception",   THROW_EXCEPTION
+  END
+#endif
+

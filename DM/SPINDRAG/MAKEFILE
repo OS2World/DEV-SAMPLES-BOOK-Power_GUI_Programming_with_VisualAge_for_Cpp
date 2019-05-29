@@ -1,0 +1,25 @@
+## Direct Manipulation - Spin Button Drag Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL :  CREATEDIR  $(ODIR)\spindrag.exe
+
+$(ODIR)\spindrag.exe : $(ODIR)\spindrag.obj $(ODIR)\spinitem.obj 
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\spindrag.exe $(ODIR)\spindrag.obj $(ODIR)\spinitem.obj 
+
+$(ODIR)\spindrag.obj: spindrag.cpp spinitem.hpp 
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\spindrag.obj spindrag.cpp
+
+$(ODIR)\spinitem.obj: spinitem.cpp spinitem.hpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\spinitem.obj spinitem.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

@@ -1,0 +1,92 @@
+/************************************************************
+/ Notebook Control - Delayed Page Loading
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include "select.h"
+
+#ifdef IC_PM  /* OS/2 Dialogs */
+#define  INCL_PM
+#define  INCL_WININPUT
+#define  INCL_HELP
+#include <os2.h>
+DLGTEMPLATE ID_DIALOG1 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "Dialog1", ID_DIALOG1, 12, 15, 180, 90, NOT FS_DLGBORDER
+    BEGIN
+        LTEXT           "Name: ", 101, 11, 58, 45, 11
+        LTEXT           "Address", 102, 11, 36, 46, 11
+        ENTRYFIELD      "", 105, 67, 60, 98, 8, ES_MARGIN
+        ENTRYFIELD      "", 106, 67, 37, 98, 7, ES_MARGIN
+        DEFPUSHBUTTON   "Help", 1029, 12, 7, 40, 14, BS_HELP
+        PUSHBUTTON      "Undo", 1030, 55, 7, 40, 14
+        PUSHBUTTON      "Default", 1031, 98, 7, 40, 14
+    END
+END
+
+DLGTEMPLATE ID_DIALOG2 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "Dialog2", ID_DIALOG2, 12, 15, 223, 137, NOT FS_DLGBORDER
+    BEGIN
+        LTEXT           "Phone ", 103, 10, 54, 45, 12
+        ENTRYFIELD      "", 107, 66, 56, 98, 8, ES_MARGIN
+        DEFPUSHBUTTON   "Help", 1029, 12, 7, 40, 14, BS_HELP
+        PUSHBUTTON      "Undo", 1030, 55, 7, 40, 14
+        PUSHBUTTON      "Default", 1031, 98, 7, 40, 14
+    END
+END
+
+DLGTEMPLATE ID_DIALOG3 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "Dialog3", ID_DIALOG3, 12, 15, 223, 137, NOT FS_DLGBORDER
+    BEGIN
+        LTEXT           "Components", 103, 10, 54, 45, 12
+        LTEXT           "Age", 104, 10, 31, 44, 10
+        ENTRYFIELD      "", 108, 74, 35, 98, 6, ES_MARGIN
+        DEFPUSHBUTTON   "Help", 1029, 12, 7, 40, 14, BS_HELP
+        PUSHBUTTON      "Undo", 1030, 55, 7, 40, 14
+        PUSHBUTTON      "Default", 1031, 98, 7, 40, 14
+        CONTROL         "", 1004, 73, 33, 105, 34, WC_COMBOBOX,
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP |
+                        WS_VISIBLE
+    END
+END
+#else  /* Windows Dialogs */
+ID_DIALOG1 DIALOG LOADONCALL MOVEABLE DISCARDABLE  0, 0, 180, 90
+STYLE WS_CHILD
+BEGIN
+  LTEXT         "Name", 101, 9, 15, 45, 11
+  LTEXT         "Address", 102, 10, 36, 46, 11
+  EDITTEXT      105, 65, 16, 98, 12, WS_BORDER | WS_TABSTOP
+  EDITTEXT      106, 65, 36, 98, 12, WS_BORDER | WS_TABSTOP
+  DEFPUSHBUTTON "Help", 1029, 19, 106, 40, 14
+  PUSHBUTTON    "Undo", 1030, 68, 106, 40, 14
+  PUSHBUTTON    "Default", 1031, 117, 106, 40, 14
+END
+
+ID_DIALOG2 DIALOG 0, 0, 180, 90
+STYLE WS_CHILD
+BEGIN
+ LTEXT          "Phone ", 103, 9, 28, 45, 12
+ EDITTEXT       107, 63, 28, 98, 12, WS_BORDER | WS_TABSTOP
+ DEFPUSHBUTTON  "Help", 1029, 16, 62, 40, 14
+ PUSHBUTTON     "Undo", 1030, 68, 61, 40, 14
+ PUSHBUTTON     "Default", 1031, 117, 61, 40, 14
+END
+
+ID_DIALOG3 DIALOG 0, 1, 180, 102
+STYLE WS_CHILD
+BEGIN
+ LTEXT "Components", 103, 7, 40, 45, 12
+ LTEXT "Age", 104, 8, 19, 44, 10
+ EDITTEXT 108, 63, 17, 98, 12, WS_BORDER | WS_TABSTOP
+ DEFPUSHBUTTON "Help", 1029, 11, 80, 40, 14
+ PUSHBUTTON "Undo", 1030, 64, 80, 40, 14
+ PUSHBUTTON "Default", 1031, 117, 80, 40, 14
+ COMBOBOX   1004, 65, 41, 95, 34, CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP
+END
+
+#endif
+

@@ -1,0 +1,22 @@
+## Sliders - Slider Arm Handler Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\slidsync.exe
+
+$(ODIR)\slidsync.exe : $(ODIR)\slidsync.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\slidsync.exe $(ODIR)\slidsync.obj
+
+$(ODIR)\slidsync.obj: slidsync.cpp slidsync.hpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\slidsync.obj slidsync.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

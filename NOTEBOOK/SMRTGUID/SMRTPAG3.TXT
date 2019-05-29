@@ -1,0 +1,1 @@
+Select a log file name from the following choices.  Ensure that you record the file name so you can refer to that file as needed.  You can open this SmartGuide at any time to update your choice or to eliminate the use of the log file.

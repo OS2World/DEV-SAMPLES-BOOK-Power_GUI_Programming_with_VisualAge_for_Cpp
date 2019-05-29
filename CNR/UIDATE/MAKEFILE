@@ -1,0 +1,37 @@
+## Container Control - Dates and Times as IDate/ITime
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+ORES=$(ODIR)\uidate.res
+RC=rc.exe -DIC_PM
+!else
+ODIR=.\win
+ORES=
+RC=irc.exe -Fo$(ODIR)\uidate.res
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\uidate.exe
+
+$(ODIR)\uidate.exe :  $(ODIR)\uidate.obj $(ODIR)\developr.obj $(ODIR)\uidate.res
+!ifdef IC_PM
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\uidate.exe $(ODIR)\uidate.obj $(ODIR)\developr.obj
+   $(RC) $(ODIR)\uidate.res  $(ODIR)\uidate.exe
+!else
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\uidate.exe  $(ODIR)\uidate.obj $(ODIR)\developr.obj $(ODIR)\uidate.res
+!endif
+
+$(ODIR)\uidate.obj: uidate.cpp developr.h
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\uidate.obj  uidate.cpp
+
+$(ODIR)\developr.obj: developr.cpp developr.h developr.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\developr.obj  developr.cpp
+
+$(ODIR)\uidate.res:  uidate.rc developr.h
+   $(RC) -r uidate.rc $(ORES)
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

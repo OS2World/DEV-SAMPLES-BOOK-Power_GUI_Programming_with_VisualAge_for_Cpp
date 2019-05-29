@@ -1,0 +1,23 @@
+## Fonts - Using Common Font Functions
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL :  CREATEDIR  $(ODIR)\genfont.exe
+
+$(ODIR)\genfont.exe : $(ODIR)\genfont.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\genfont.exe $(ODIR)\genfont.obj
+
+$(ODIR)\genfont.obj : genfont.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\genfont.obj genfont.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

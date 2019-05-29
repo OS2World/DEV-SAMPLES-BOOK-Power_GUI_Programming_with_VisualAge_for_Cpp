@@ -1,0 +1,192 @@
+// There are two types of records: Chapter and Program.
+// Chapter records are identified by " c " in their text.
+// Program records are identified by " g " in their text if
+// they are GUI programs and " n " in their text if not.
+// Program records also have " b " if they run on both OS/2
+// and Windows, " w " if they run only on Windows, and
+// " o " if they run only on OS/2.  Also, we use "bo" for
+// programs that run fine on Windows but require a CSD level
+// on OS/2 for interface adding in the Windows 3.5 release.
+ c  1   Getting Started
+   g b  getstart\start1          start1       Simple Example - Version 1
+   g b  getstart\start2          start2       Simple Example - Version 2
+   g b  getstart\nonport         nonport      Using Platform-Specific Code
+ c  2   Object-Oriented User Interface Fundamentals
+ c  3   Tour of Open Class Library
+   g b  latour\shopping          shopping     Shopping List
+ c  4   Windows, Handlers, and Events
+ c  5   Frame Window Basics
+   g b  frame1\dialog            dialog       Frame Window From Dialog Template
+   g b  frame1\modal             modal        Modal Frame Window
+   g b  frame1\minmax            minmax       Minimize/Maximize Handler
+   g b  frame1\ok2close          ok2close     Confirm Frame Window Closing
+   g b  frame1\frmextns          frmextns     Frame Extension Sampler
+   g b  frame1\dismiss           dismiss      Dismissing a Window
+   g b  frame1\infoarea          infoarea     Information Area for the System Menu
+   g b  frame1\titlebar          titlebar     Accessing the Title Bar
+ c  6   Menus and Keyboard Accelerators
+   g b  menus\accel              accel        Accelerator Table Loading
+   g b  menus\addsubmn           addsubmn     Loading a Resource Submenus
+   g b  menus\cursor             cursor       Using a Menu Cursor
+   g b  menus\drawmenu           drawmenu     Drawing Menu Items
+   g bo menus\dynaccel           dynaccel     Dynamic Accelerators
+   g b  menus\dynpopup           dynpopup     Dynamically-Created Pop Up Menus
+   g b  menus\dynsubmn           dynsubmn     Dynamic Submenus
+   g b  menus\menubar            menubar      Using an IMenuBar
+   g b  menus\menures            menures      Defining a Menu Resource
+   g b  menus\sysmenu            sysmenu      Accessing the System Menu
+   g o  menus\titlebmp           titlebmp     Title Bar Bitmaps
+   g b  menus\txtpopup           txtpopup     Pop Up Menu Sample
+ c  7   Controls
+   g b  controls\ctors           ctors        Control Constructor and Color
+ c  8   Static Controls
+   g b  static\boxes             boxes        Group Box and Outline Box
+   g b  static\iconbmp           iconbmp      Icons and Bitmaps
+   g b  static\textclr           textclr      Static Text Colors
+   g b  static\textcv            textcv       Static Text and Canvases
+   g b  static\textstyl          textstyl     Static Text Styles
+ c  9   Edit Controls
+   g b  editctls\logon           logon        Using an Edit Handler
+   g b  editctls\simple          simple       Simple Edit Control
+ c  10  Button Controls
+   g b   buttons\pushbut         pushbut      Push Buttons
+   g o   buttons\titlebut        titlebut     Title Bar Bitmaps
+   g b   buttons\radio           radio        Radio Button Select Handler
+ c  11  List Controls
+   g b   listctls\drawlist       drawlist     List Box Custom Drawing
+   g b   listctls\spinbut        spinbut      Spin Button Date Control
+ c  12  Slider Controls
+   g b   slider\progind          progind      Progress Indicator
+   g b   slider\slider           slider       Linear Slider
+   g b   slider\cslider          cslider      Circular Slider
+   g b   slider\sliddraw         sliddraw     Progress Indicator Custom Painting
+   g b   slider\slidsync         slidsync     Synchronized Slider Controls
+ c  13  Container Control
+   g b   cnr\treetxtv            treetxtv     Container Tree Text View
+   g b   cnr\treeicov            treeicov     Container Tree Icon View
+   g b   cnr\treenamv            treenamv     Container Tree Name View
+   g b   cnr\textview            textview     Container Text View with Multiple Lines
+   g b   cnr\cdate               cdate        Dates and Times using CDATE/CTIME
+   g b   cnr\uidate              uidate       Dates and Times using IDate/ITime
+   g b   cnr\help                help         Using Help in the Container
+   g b   cnr\edithdr             edithdr      Container MLE Edit Handler
+   g b   cnr\popup               popup        Container Popup Menus
+   g b   cnr\dynobj              dynobj       Dynamic Creation of Objects
+   g b   cnr\minicnr             minicnr      Using Mini-Icons in the Container
+   g b   cnr\spreadsh            spreadsh     SpreadSheet Behavior in the Details View
+   g o   cnr\treedet             treedet      Combining the Tree and Details View
+   g b   cnr\cnralloc            cnralloc     Using ICnrAllocator
+ c  14  Notebook Control
+   g b   notebook\simple         simple       Simple Client Notebook
+   g b   notebook\default        default      Default Notebook
+   g b   notebook\addpages       addpages     Adding Notebook Pages
+   g b   notebook\vportdlg       vportdlg     Using a View Port as a Notebook Page
+   g b   notebook\select         select       Delayed Addition of Pages
+   g b   notebook\smrtguid       smrtguid     Smart Guide Notebook
+ c  15  Canvas Controls
+   g b   canvas\lunchdlg         lunchdlg     Lunch Dialog Box
+   g b   canvas\cvsimple         cvsimple     Simple ICanvas
+   g b   canvas\cvtab            cvtab        Nested Canvas Tabbing
+   g b   canvas\setlunch         setlunch     Lunch Dialog using a Set Canvas
+   g b   canvas\setdecks         setdecks     Decks in a Set Canvas
+   g b   canvas\setpack          setpack      Deck Packing and Alignment in a Set Canvas
+   g b   canvas\mcsimple         mcsimple     Simple Multicell Canvas
+   g b   canvas\mclunch          mclunch      Lunch Dialog using a Multicell Canvas
+   g b   canvas\mcbad            mcbad        Multicell Canvas without Expandable Rows/Columns
+   g b   canvas\mccombo          mccombo      Multicell Canvas with Combination Boxes
+   g b   canvas\mcgroup          mcgroup      Multicell Canvas with Smarter Group Boxes
+   g b   canvas\splittxt         splittxt     Simple Split Canvas
+   g b   canvas\splitprb         splitprb     Split Canvas with Problem Windows
+   g b   canvas\vportbmp         vportbmp     View Port for Scrolling a Bitmap
+   g b   canvas\vportlog         vportlog     View Port with Logically-Sized Window
+   g b   canvas\complex          complex      Complex Canvas Example
+ c  16  Tool Bars, Fly-Over Help, and Custom Buttons
+   g b   toolbar\animated        animated     Animated Buttons
+   g b   toolbar\cbutsimp        cbutsimp     Simple Custom Buttons
+   g b   toolbar\cbuthdr         cbuthdr      Custom Button Handler
+   g b   toolbar\flybasic        flybasic     Simple Fly-over Help
+   g b   toolbar\flytbar         flytbar      Tool Bar Fly-over Help
+   g b   toolbar\tbardeck        tbardeck     Using Decks in Tool Bars
+   g b   toolbar\tbarfrms        tbarfrms     Floating Tool Bars
+   g b   toolbar\tbargrps        tbargrps     Using Groups in Tool Bars
+   g b   toolbar\tbarlocs        tbarlocs     Tool Bar Locations
+   g b   toolbar\tbarmult        tbarmult     Multiple Tool Bars
+ c  17  Reusable Handlers
+   g b   genhdrs\cmdhdrs         cmdhdrs      Simple Command Handler        
+   g b   genhdrs\keybd           keybd        Keyboard Handler
+   g b   genhdrs\mouseclk        mouseclk     Mouse Click Handler
+   g bo  genhdrs\enablcls        enablcls     Disable Close
+   g bo  genhdrs\mousemov        mousemov     Processing Mouse Pointer Movement
+   g b   genhdrs\painthdr        painthdr     Paint Handler
+ c  18  Fonts and Views
+   g b   fonts\simple            simple       Simple Font Example
+   g b   fonts\genfont           genfont      Common Font Functions
+   g b   fonts\advfont           advfont      Using Advanced Font Functions
+   g b   fonts\filedlg           filedlg      Using the File Dialog
+   g b   fonts\fontdlg           fontdlg      Using the Font Dialog
+ c  19  Advanced Frame Window Topics
+   g b   advframe\fstyle         fstyle       Frame Window Styles
+   g b   advframe\drawextn       drawextn     Derived Frame Extensions
+   g o   advframe\framesav       framesav     Frame Window Position Save Handler
+   g b   advframe\tstdlg         tstdlg       Dialog Windows
+   g b   advframe\winview        winview      Window Viewer Example
+   g w   advframe\mdi            mdi          MDI Example
+ c  20  Applications and Threads
+   g b   thread\simple           simple       Simple Multi-threaded Example
+   n b   thread\exit             threadex     Thread Termination     |IThread|
+   n b   thread\improved         broken       Broken Thread Example
+   n b   thread\improved         fixed        Fixed Thread Example
+   n b   thread\improved         easy         Simplified IThreadMemberFn
+   g b   thread\picalc           picalc       Pi Calculator
+   g b   thread\pithread         pithread     Calculate Pi on a Thread
+   g b   thread\piserve          piserve      Service Thread
+   g b   thread\starting         starting     Starting Threads Using IThread
+   g b   thread\threads          threads      Ultimate IThread Demo program
+   n b   thread\pi               NONE         Pi Function (object only)
+   n b   thread\signal           NONE         Event Semaphore (object only)
+   n b   thread\userevt          NONE         Portable User Event class (object only)
+ c  21  Direct Manipulation
+   g o   dm\menudrag             menudrag     Menu Drag Example
+   g b   dm\spindrag             spindrag     Spin Button Drag Example
+   g b   dm\lboxdrag             lboxdrag     List Box Drag Example
+   g b   dm\dragview             dragview     Drag Information Viewer
+ c  22  Dynamic Data Exchange Framework
+ c  23  Using Help
+   g b   help\helpmenu           helpmenu     Help Menu Choices
+   g bo  help\helpid             helpid       Runtime Setting of Help Panels
+   g bo  help\helptbl            helptbl      Help Tables
+   g b   help\helpothr           helpothr     Help for Special Cases
+ c  24  Using Resources
+   n b   reslib\exetext          exetext      Using Resource in the EXE
+   n b   reslib\dlltext          dlltext      Building a Resource DLL
+   g b   reslib\stattxt          stattxt      Switching Resources Dynamically
+   g b   reslib\procaddr         NONE         Using IProcedureAddress
+ c  25  Storing Data in a Profile
+   n b   profile\basicpro        basicpro     Basic Profile Example
+   g b   profile\advprof         profile      GUI Profile Viewer     |/s|
+   n bwc profile\viewprof        viewprof     Non-GUI Profile Viewer |/?|
+ c  26  Data Types
+   n bwc data\cipher             cipher       Using an IString as a Buffer
+   n b   data\igrep              igrep        Using IString::isLike  |..\igrep.cpp IString|
+   n bwc data\strngtst           strngtst     Using IStringTest      |"Capture the Power"|
+   n b   data\convert            convert      Using IString Conversion Functions  |c2x cat|
+   n b   data\mybuffer           mybuffer     Replacing IBuffer With Your Own Class
+   n b   data\str2date           str2date     Creating Dates and Times from Strings |90/11/1 %c|
+   n b   data\stparse            stparse      String Parsing
+ c  27  Error Handling And Reporting
+   n b   exceptns\newexcp        newexcp      Deriving a New Exception Class
+   g b   exceptns\exviewer       exviewer     An Exception Viewer
+ c  28  Problem Determination
+   n b   debug\trace             trace        Simple Trace Example
+   g b   debug\tracebox          tracebox     Trace Browser Utility
+   g b   debug\prtque            prtque       Trace Queue Browser Example
+   g b   debug\zeroptr           zeroptr      Debugging a Zero Pointer
+   g b   debug\excdisp           excdisp      Displaying an Exception in a Message Box
+   g b   debug\invisibl          invisibl     Finding Why a Window is not Visible
+   n b   debug\sigterm           sigterm      Building a Termination Signal Handler
+ c  29  Packaging and Performance Tuning
+   g b   shipapp\hello1          hello1       Changes to Hello1 for Start-Up Tuning
+   n b   shipapp\appstat         appstat      Using Static Object Functions instead of Static Objects
+         shipapp\genprags        NONE         Command File to Generate alloc_text for Static Functions
+ c  n/a Examples not discussed in the book
+   g o   extlib\valueset         testvset     Value Set Test Program

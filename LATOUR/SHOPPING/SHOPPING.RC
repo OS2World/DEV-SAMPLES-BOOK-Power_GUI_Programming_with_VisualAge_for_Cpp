@@ -1,0 +1,36 @@
+/************************************************************
+/ Tour of the UICL - Shopping List Example Program
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc.
+/ All Rights Reserved.
+************************************************************/
+#include <icconst.h>
+#include "shopping.h"
+
+#ifdef IC_PM  /* OS/2 Resources */
+// #define INCL_WINFRAMEMGR
+// #include <os2.h>
+
+ICON    ID_THEBOOKICON    .\os2\bookc.ico
+BITMAP  ID_THEBOOKBITMAP  .\os2\thebook.bmp
+
+#else  /* Windows Resources */
+
+#include <windows.h>
+
+ID_THEBOOKICON    ICON    .\win\bookc.ico
+ID_THEBOOKBITMAP  BITMAP  .\win\thebook.bmp
+
+#endif
+
+STRINGTABLE PRELOAD
+  BEGIN
+    IC_ID_OPEN                    ,    "Open the purchase item"
+    IC_ID_SAVE                    ,    "Save the purchase item"
+    IC_ID_CUT                     ,    "Cut the purchase item"
+    IC_ID_COPY                    ,    "Copy the purchase item"
+    IC_ID_PASTE                   ,    "Paste the purchase item"
+  END
+
+

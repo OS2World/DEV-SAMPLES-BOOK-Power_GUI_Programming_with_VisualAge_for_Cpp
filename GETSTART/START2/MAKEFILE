@@ -1,0 +1,48 @@
+## Getting Started - Simple Program, Version 2
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+ORES=$(ODIR)\start2.res
+RC=rc.exe -DIC_PM
+!else
+ODIR=.\win
+ORES=
+RC=irc.exe -Fo$(ODIR)\start2.res
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\start2.exe
+
+$(ODIR)\start2.exe : $(ODIR)\start2.obj $(ODIR)\start2w.obj \
+                     $(ODIR)\start2ch.obj $(ODIR)\start2.res
+!ifdef IC_PM
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\start2.exe \
+       $(ODIR)\start2.obj $(ODIR)\start2w.obj \
+       $(ODIR)\start2ch.obj
+   $(RC) $(ODIR)\start2.res $(ODIR)\start2.exe
+!else
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\start2.exe \
+       $(ODIR)\start2.obj $(ODIR)\start2w.obj \
+       $(ODIR)\start2ch.obj $(ODIR)\start2.res
+!endif
+
+$(ODIR)\start2.obj: start2.cpp start2w.hpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\start2.obj start2.cpp
+
+$(ODIR)\start2ch.obj: start2ch.cpp start2w.hpp start2.h
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\start2ch.obj start2ch.cpp
+
+$(ODIR)\start2w.obj: start2w.cpp start2w.hpp start2ch.hpp \
+                     start2.h
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\start2w.obj start2w.cpp
+   copy start2w.cpp $(ODIR)
+
+$(ODIR)\start2.res: start2.rc start2.h
+   $(RC) -r start2.rc $(ORES)
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

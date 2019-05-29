@@ -1,0 +1,124 @@
+/************************************************************
+/ Menus - Using a Menu Cursor
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include "cursor.h"
+
+#ifdef IC_PM   /* OS/2 resources */
+#include <os2.h>
+
+BITMAP MI_BITMAP  menures.bmp
+
+MENU MAIN_MENU
+BEGIN
+  SUBMENU "~File", MI_FILE
+    BEGIN
+      MENUITEM "~New...",  MI_NEW
+      MENUITEM "~Open...", MI_OPEN
+      MENUITEM "~Save",    MI_SAVE
+      MENUITEM "Save ~as...", MI_SAVEAS
+    END
+  SUBMENU "~Edit", MI_EDIT
+    BEGIN
+      MENUITEM "~Undo",  MI_UNDO
+      MENUITEM "",       MI_SEPARATOR, MIS_SEPARATOR
+      MENUITEM "~Cut",   MI_CUT
+      MENUITEM "Copy",   MI_COPY
+      MENUITEM "~Paste", MI_PASTE
+    END
+  SUBMENU "E~xamples", MI_EXAMPLE
+    BEGIN
+      MENUITEM "#1061",    MI_BITMAP,    MIS_BITMAP
+      MENUITEM "",         MI_SEPARATOR, MIS_SEPARATOR
+      MENUITEM "~Close",   SC_CLOSE,     MIS_SYSCOMMAND
+      MENUITEM "~Help",    MI_HELP,      MIS_HELP
+    END
+  SUBMENU "~Help", MI_HELP
+    BEGIN
+      MENUITEM "~General help...",   MI_GENERAL_HELP
+      MENUITEM "~Extended help...",  SC_HELPEXTENDED, MIS_SYSCOMMAND
+      MENUITEM "~Keys help...",      SC_HELPKEYS, MIS_SYSCOMMAND
+      MENUITEM "Help ~index...",     SC_HELPINDEX, MIS_SYSCOMMAND
+    END
+END
+
+STRINGTABLE
+BEGIN
+  MI_FILE           ,"File"
+  MI_NEW            ,"~New..."
+  MI_OPEN           ,"~Open..."
+  MI_SAVE           ,"~Save"
+  MI_SAVEAS         ,"Save ~as..."
+  MI_EDIT           ,"~Edit"
+  MI_UNDO           ,"~Undo"
+  MI_CUT            ,"~Cut"
+  MI_COPY           ,"Copy"
+  MI_PASTE          ,"~Paste"
+  MI_EXAMPLE        ,"E~xample"
+  MI_BITMAP         ,"Bitmap"
+  MI_HELP           ,"~Help"
+  MI_GENERAL_HELP   ,"General Help"
+  SC_CLOSE          ,"~Close"
+END
+
+#else    /* Windows resources */
+#include <windows.h>
+
+MI_BITMAP BITMAP  menures.bmp
+
+MAIN_MENU  MENUEX
+BEGIN
+  POPUP     "&File"            , MI_FILE
+    BEGIN
+      MENUITEM  "&New..."      , MI_NEW
+      MENUITEM  "&Open..."     , MI_OPEN
+      MENUITEM  "&Save"        , MI_SAVE
+      MENUITEM  "Save &as..."  , MI_SAVEAS
+    END
+  POPUP     "&Edit"            , MI_EDIT
+    BEGIN
+      MENUITEM  "&Undo"        , MI_UNDO
+      MENUITEM  ""             , MI_SEPARATOR, SEPARATOR
+      MENUITEM  "&Cut"         , MI_CUT
+      MENUITEM  "Copy"         , MI_COPY
+      MENUITEM  "&Paste"       , MI_PASTE
+    END
+  POPUP     "E&xamples"        , MI_EXAMPLE
+    BEGIN
+      MENUITEM  "#1061"        , MI_BITMAP  ,  BITMAP
+      MENUITEM  ""             , MI_SEPARATOR, SEPARATOR
+      MENUITEM  "&Close"       , SC_CLOSE  /*MIS_SYSCOMMAND*/
+      MENUITEM  "&Help"        , MI_HELP  ,  RIGHTJUSTIFY
+    END
+  POPUP     "&Help"            , MI_HELP
+    BEGIN
+      MENUITEM  "&General help..."  , MI_GENERAL_HELP
+      MENUITEM  "&Extended help..." , SC_HELPEXTENDED  /*MIS_SYSCOMMAND*/
+      MENUITEM  "&Keys help..."     , SC_HELPKEYS      /*MIS_SYSCOMMAND*/
+      MENUITEM  "Help &index..."    , SC_HELPINDEX     /*MIS_SYSCOMMAND*/
+    END
+END
+
+STRINGTABLE
+BEGIN
+  MI_FILE         , "File"
+  MI_NEW          , "&New..."
+  MI_OPEN         , "&Open..."
+  MI_SAVE         , "&Save"
+  MI_SAVEAS       , "Save &as..."
+  MI_EDIT         , "&Edit"
+  MI_UNDO         , "&Undo"
+  MI_CUT          , "&Cut"
+  MI_COPY         , "Copy"
+  MI_PASTE        , "&Paste"
+  MI_EXAMPLE      , "E&xample"
+  MI_BITMAP       , "Bitmap"
+  MI_HELP         , "&Help"
+  MI_GENERAL_HELP , "General Help"
+  SC_CLOSE        , "&Close"
+END
+#endif
+

@@ -1,0 +1,22 @@
+## Static Controls - Style Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\textstyl.exe
+
+$(ODIR)\textstyl.exe :  $(ODIR)\textstyl.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\textstyl.exe $(ODIR)\textstyl.obj
+
+$(ODIR)\textstyl.obj: textstyl.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\textstyl.obj  textstyl.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

@@ -1,0 +1,50 @@
+## Advanced Frame - Window Viewer Example
+
+CFLAGS = /Ft- /Gd+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+LIBS =
+ODIR=.\os2
+RC=rc.exe -DIC_PM
+RCOUT=
+!else
+LIBS = user32.lib
+ODIR=.\win
+RC=irc.exe
+RCOUT=-Fo
+!endif
+ORES=$(ODIR)\winview.res
+
+OBJS = $(ODIR)\winview.obj  \
+       $(ODIR)\iconview.obj  \
+       $(ODIR)\treeview.obj \
+       $(ODIR)\hwinobj.obj  \
+       $(ODIR)\hwindow.obj  \
+       $(ODIR)\infoview.obj
+
+ALL : CREATEDIR $(ODIR)\winview.exe
+
+$(ODIR)\winview.exe : $(OBJS) $(ORES)
+!ifdef IC_PM
+   icc $(CFLAGS) /B"$(LFLAGS)" $(LIBS) /Fe$@ $(OBJS)
+   $(RC) $(ORES) $@
+!else
+   icc $(CFLAGS) /B"$(LFLAGS)" $(LIBS) /Fe$@ $**
+!endif
+
+winview.cpp  : treeview.hpp hwinobj.hpp hwindow.hpp
+treeview.cpp : treeview.hpp iconview.hpp infoview.hpp hwinobj.hpp hwindow.hpp winview.h
+iconview.cpp : iconview.hpp hwinobj.hpp hwindow.hpp winview.h
+infoview.cpp : infoview.hpp treeview.hpp hwinobj.hpp hwindow.hpp
+hwinobj.cpp  : hwinobj.hpp hwindow.hpp winview.h
+hwindow.cpp  : hwindow.hpp
+
+{.}.cpp{$(ODIR)}.obj:
+   icc $(CFLAGS) /C+ /Fo$@ $(@B).cpp
+
+$(ORES): winview.rc winview.h $(ODIR)\app.ico $(ODIR)\view.ico
+   $(RC) -r $(@B).rc $(RCOUT)$@
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

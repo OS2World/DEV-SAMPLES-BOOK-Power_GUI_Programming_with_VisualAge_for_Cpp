@@ -1,0 +1,21 @@
+/************************************************************
+/ Container Control - Dates and Times as IDate/ITime
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include "developr.h"
+
+#ifdef IC_PM
+#define  INCL_PM
+#include <os2.h>
+
+ICON ID_DEVELOPER  .\os2\folder.ico
+
+#else
+
+ID_DEVELOPER ICON  .\win\folder.ico
+
+#endif
+

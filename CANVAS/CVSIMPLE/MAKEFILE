@@ -1,0 +1,22 @@
+## Canvas - Simple ICanvas Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\cvsimple.exe
+
+$(ODIR)\cvsimple.exe : $(ODIR)\cvsimple.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\cvsimple.exe $(ODIR)\cvsimple.obj
+
+$(ODIR)\cvsimple.obj: cvsimple.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\cvsimple.obj cvsimple.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

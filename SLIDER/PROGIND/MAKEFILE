@@ -1,0 +1,22 @@
+## Sliders - Progress Indicator Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\progind.exe
+
+$(ODIR)\progind.exe : $(ODIR)\progind.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\progind.exe $(ODIR)\progind.obj
+
+$(ODIR)\progind.obj: progind.cpp progind.hpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\progind.obj progind.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

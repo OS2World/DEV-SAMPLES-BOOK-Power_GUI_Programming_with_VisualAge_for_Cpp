@@ -1,0 +1,1 @@
+Choose the Yes radio button to keep a file logging your actions.  Choose No if you do not want a recording of your activities.  If you select No, the Next push button will become disabled and you can press Done to save your choice and exit the SmartGuide.

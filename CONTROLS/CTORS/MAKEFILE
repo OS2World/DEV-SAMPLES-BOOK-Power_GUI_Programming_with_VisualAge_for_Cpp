@@ -1,0 +1,22 @@
+## Controls - Constructor and Color Sample
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL :  CREATEDIR  $(ODIR)\ctors.exe
+
+$(ODIR)\ctors.exe : $(ODIR)\ctors.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\ctors.exe $(ODIR)\ctors.obj
+
+$(ODIR)\ctors.obj: ctors.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\ctors.obj ctors.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

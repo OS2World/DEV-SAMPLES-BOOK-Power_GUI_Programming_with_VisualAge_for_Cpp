@@ -1,0 +1,36 @@
+## Button Controls - Title Bar Bitmap Example
+
+!ifdef IC_PM
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+ODIR=.\os2
+ORES=$(ODIR)\titlebut.res
+RC=rc.exe -DIC_PM
+
+
+ALL : CREATEDIR   $(ODIR)\titlebut.exe
+
+$(ODIR)\titlebut.exe :  $(ODIR)\titlebut.obj $(ODIR)\titlebut.res
+!ifdef IC_PM
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\titlebut.exe $(ODIR)\titlebut.obj
+   $(RC) $(ODIR)\titlebut.res  $(ODIR)\titlebut.exe
+!else
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\titlebut.exe  $(ODIR)\titlebut.obj $(ODIR)\titlebut.res
+!endif
+
+$(ODIR)\titlebut.obj: titlebut.cpp titlebut.h
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\titlebut.obj  titlebut.cpp
+
+$(ODIR)\titlebut.res:  titlebut.rc titlebut.h
+   $(RC) -r titlebut.rc $(ORES)
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+!else
+
+ALL:
+  @ECHO ERROR:  Title Bitmaps is not supported on Windows.
+
+!endif

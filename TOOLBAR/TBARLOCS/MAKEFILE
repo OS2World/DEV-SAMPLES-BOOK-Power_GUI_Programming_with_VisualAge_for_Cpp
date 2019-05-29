@@ -1,0 +1,23 @@
+## Tool Bars - Tool Bar Locations
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\tbarlocs.exe
+
+$(ODIR)\tbarlocs.exe :  $(ODIR)\tbarlocs.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\tbarlocs.exe $(ODIR)\tbarlocs.obj
+
+$(ODIR)\tbarlocs.obj: tbarlocs.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\tbarlocs.obj  tbarlocs.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

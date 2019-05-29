@@ -1,0 +1,35 @@
+## Notebook Control - Adding Notebook Windows to a Viewport
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+ORES=$(ODIR)\vportdlg.res
+RC=rc.exe -DIC_PM
+!else
+ODIR=.\win
+ORES=
+RC=irc.exe -Fo$(ODIR)\vportdlg.res
+!endif
+
+
+ALL : CREATEDIR  $(ODIR)\vportdlg.exe
+
+$(ODIR)\vportdlg.exe :  $(ODIR)\vportdlg.obj $(ODIR)\vportdlg.res
+!ifdef IC_PM
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\vportdlg.exe $(ODIR)\vportdlg.obj
+   $(RC) $(ODIR)\vportdlg.res  $(ODIR)\vportdlg.exe
+!else
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\vportdlg.exe  $(ODIR)\vportdlg.obj $(ODIR)\vportdlg.res
+!endif
+
+$(ODIR)\vportdlg.obj: vportdlg.cpp vportdlg.h deferacc.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\vportdlg.obj  vportdlg.cpp
+
+$(ODIR)\vportdlg.res:  vportdlg.rc vportdlg.h
+   $(RC) -r vportdlg.rc $(ORES)
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

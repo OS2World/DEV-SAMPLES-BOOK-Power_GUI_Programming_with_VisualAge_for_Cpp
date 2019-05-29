@@ -1,0 +1,23 @@
+## Container Control - Keyboard Handler for MLE
+
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\edithdr.exe
+
+$(ODIR)\edithdr.exe :  $(ODIR)\edithdr.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\edithdr.exe $(ODIR)\edithdr.obj
+
+$(ODIR)\edithdr.obj: edithdr.cpp keyhdr.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\edithdr.obj  edithdr.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

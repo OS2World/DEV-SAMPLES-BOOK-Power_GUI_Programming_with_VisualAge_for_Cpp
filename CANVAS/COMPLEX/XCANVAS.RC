@@ -1,0 +1,27 @@
+/**********************************************************
+/ Canvas - Complex Canvas Example
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+**********************************************************/
+#include "xcanvas.h"
+
+#ifdef IC_PM /* OS/2 resource */
+
+#include <os2.h>
+
+BITMAP ID_FOUNTAIN_BMP  .\..\vportbmp\os2\fountain.bmp
+BITMAP ID_KIDS_BMP      .\..\vportbmp\os2\kids.bmp
+BITMAP ID_OLDBOOK_BMP   .\..\vportbmp\os2\thebook.bmp
+ICON   ID_SCREEN_ICON  .\os2\screen.ico
+
+#else /* Windows resource */
+
+ID_FOUNTAIN_BMP BITMAP  .\..\vportbmp\win\fountain.bmp
+ID_KIDS_BMP     BITMAP  .\..\vportbmp\win\kids.bmp
+ID_OLDBOOK_BMP  BITMAP  .\..\vportbmp\win\thebook.bmp
+ID_SCREEN_ICON  ICON   .\win\screen.ico
+
+#endif
+

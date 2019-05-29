@@ -1,0 +1,27 @@
+## List Controls - List Box Custom Drawing
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+LIBS =
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR  $(ODIR)\drawlist.exe
+
+$(ODIR)\drawlist.exe :  $(ODIR)\drawlist.obj $(ODIR)\listdhdr.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\drawlist.exe $(ODIR)\drawlist.obj $(ODIR)\listdhdr.obj
+
+$(ODIR)\listdhdr.obj: listdhdr.cpp listdhdr.hpp listitem.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\listdhdr.obj  listdhdr.cpp
+
+$(ODIR)\drawlist.obj: drawlist.cpp listdhdr.hpp listitem.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\drawlist.obj  drawlist.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

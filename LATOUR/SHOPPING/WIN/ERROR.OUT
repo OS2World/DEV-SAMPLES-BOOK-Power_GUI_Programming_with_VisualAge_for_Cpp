@@ -1,0 +1,8 @@
+00000000 796203:78 >IAccessError exception thrown.
+00000000 796203:78 >   function: IDLLModule::addRef()
+00000000 796203:78 >   file: ireslib1.cpp
+00000000 796203:78 >   line: 654
+00000001 796203:78 >   Error Id is unavailable.
+00000002 796203:78 >   Error Code group is Presentation System
+00000003 796203:78 >   Exception text is:
+00000004 796203:78 >      LoadLibrary : "G:\POWERGUI\LATOUR\SHOPPING\WIN\SHOPPING.EXE" :No error text is available.

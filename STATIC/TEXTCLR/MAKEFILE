@@ -1,0 +1,24 @@
+## Static Controls - Static Text Color Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\textclr.exe
+
+$(ODIR)\textclr.exe :  $(ODIR)\textclr.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\textclr.exe $(ODIR)\textclr.obj
+
+$(ODIR)\textclr.obj: textclr.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\textclr.obj  textclr.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+
+

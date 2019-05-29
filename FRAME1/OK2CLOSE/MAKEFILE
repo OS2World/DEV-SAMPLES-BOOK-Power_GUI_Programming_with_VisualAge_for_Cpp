@@ -1,0 +1,22 @@
+## Frame Window Basics - Confirm Frame Closing
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\ok2close.exe
+
+$(ODIR)\ok2close.exe : $(ODIR)\ok2close.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\ok2close.exe $(ODIR)\ok2close.obj
+
+$(ODIR)\ok2close.obj: ok2close.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\ok2close.obj ok2close.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

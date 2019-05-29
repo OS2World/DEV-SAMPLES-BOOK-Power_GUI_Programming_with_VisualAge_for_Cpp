@@ -1,0 +1,26 @@
+## Sliders - Progress Indicator Custom Painting Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft- /DIC_PMCOMPATIBLE
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\sliddraw.exe
+
+$(ODIR)\sliddraw.exe : $(ODIR)\sliddraw.obj $(ODIR)\taskview.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\sliddraw.exe $(ODIR)\sliddraw.obj $(ODIR)\taskview.obj
+
+$(ODIR)\sliddraw.obj: sliddraw.cpp taskview.hpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\sliddraw.obj sliddraw.cpp
+
+$(ODIR)\taskview.obj: taskview.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\taskview.obj taskview.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

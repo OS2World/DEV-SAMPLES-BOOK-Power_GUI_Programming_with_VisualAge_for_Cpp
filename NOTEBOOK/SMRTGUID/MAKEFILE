@@ -1,0 +1,39 @@
+## Notebook Control - Smart Guide
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\smrtguid.exe
+
+$(ODIR)\smrtguid.exe :  $(ODIR)\smrtpage.obj $(ODIR)\smrttext.obj $(ODIR)\smrtchce.obj $(ODIR)\smrtguid.obj  $(ODIR)\training.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\smrtguid.exe $(ODIR)\smrtguid.obj $(ODIR)\training.obj $(ODIR)\smrtpage.obj $(ODIR)\smrttext.obj $(ODIR)\smrtchce.obj
+
+
+$(ODIR)\training.obj: training.cpp smrtguid.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\training.obj  training.cpp
+
+$(ODIR)\smrtpage.obj: smrtpage.cpp smrtguid.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\smrtpage.obj  smrtpage.cpp
+
+$(ODIR)\smrttext.obj: smrttext.cpp smrtguid.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\smrttext.obj  smrttext.cpp
+
+$(ODIR)\smrtchce.obj: smrtchce.cpp smrtguid.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\smrtchce.obj  smrtchce.cpp
+
+$(ODIR)\smrtguid.obj: smrtguid.cpp smrtguid.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\smrtguid.obj  smrtguid.cpp
+   copy smrtpag1.txt $(ODIR)
+   copy smrtpag2.txt $(ODIR)
+   copy smrtpag3.txt $(ODIR)
+   copy smrtpag4.txt $(ODIR)
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

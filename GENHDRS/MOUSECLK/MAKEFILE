@@ -1,0 +1,22 @@
+## Resuable Handlers - Processing Mouse Clicks
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\mouseclk.exe
+
+$(ODIR)\mouseclk.exe : $(ODIR)\mouseclk.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\mouseclk.exe $(ODIR)\mouseclk.obj
+
+$(ODIR)\mouseclk.obj: mouseclk.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\mouseclk.obj mouseclk.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

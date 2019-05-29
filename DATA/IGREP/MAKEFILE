@@ -1,0 +1,23 @@
+## Data Types - Using IString::isLike
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS =
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\igrep.exe
+
+$(ODIR)\igrep.exe :  $(ODIR)\igrep.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\igrep.exe $(ODIR)\igrep.obj
+
+$(ODIR)\igrep.obj: igrep.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\igrep.obj  igrep.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

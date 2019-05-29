@@ -1,0 +1,19 @@
+/************************************************************
+/ Container Control - Mini-icon Container
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+
+#include "minicnr.h"
+
+#ifdef IC_PM
+  #define  INCL_PM
+  #include <os2.h>
+
+  ICON ICON_FOLDER   .\os2\folder.ico
+#else
+  ICON_FOLDER  ICON  .\win\folder.ico
+#endif
+

@@ -1,0 +1,42 @@
+################################################################
+# FILE NAME: makefile                                          #
+#                                                              #
+# DESCRIPTION:                                                 #
+#   makefile for IThread "improvement" sample programs:        #
+#     broken - Demonstrates problem                            #
+#     fixed  - Demonstrates improved IThread/IThreadFn         #
+#     easy   - Demonstrates simplified IThreadMemberFn         #
+#                                                              #
+# COPYRIGHT:                                                   #
+#   Licensed Materials - Property of Solution Frameworks       #
+#   Copyright (C) 1996, Solution Frameworks                    #
+#   All Rights Reserved                                        #
+################################################################
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:VIO
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL :  CREATEDIR  \
+       $(ODIR)\broken.exe \
+       $(ODIR)\fixed.exe \
+       $(ODIR)\easy.exe
+
+$(ODIR)\broken.exe :  broken.cpp improved.hpp
+   icc $(CFLAGS) /B"$(LFLAGS)"  /Fo$(ODIR)\broken.obj /Fe$@ broken.cpp
+
+$(ODIR)\fixed.exe :  fixed.cpp improved.hpp
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fo$(ODIR)\fixed.obj /Fe$@ fixed.cpp 
+
+$(ODIR)\easy.exe :  easy.cpp improved.hpp
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fo$(ODIR)\easy.obj /Fe$@ easy.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR) md $(ODIR)
+
+

@@ -1,0 +1,88 @@
+/**********************************************************
+/ Reusable Handlers - Keyboard Handler
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+**********************************************************/
+#include "keybd.h"
+
+#ifdef IC_PM /* OS/2 resource */
+
+#include <os2.h>
+
+DLGTEMPLATE ID_KEYBD_DIALOG LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "Keyboard Handler Example", ID_KEYBD_DIALOG,
+            20, 7, 257, 137,
+            WS_VISIBLE, FCF_SYSMENU | FCF_TITLEBAR
+    BEGIN
+        LTEXT    "Uppercase and hexadecimal keyboard handlers.",
+                        -1, 4, 124, 233, 8
+        LTEXT           "Unfiltered input (no handlers)",
+                        -1, 8, 110, 130, 8
+        ENTRYFIELD      "", ID_ANY_ENTRY, 136, 110, 114, 8,
+                        ES_MARGIN | WS_GROUP
+        LTEXT           "Uppercase input", -1, 8, 95, 130, 8
+        ENTRYFIELD      "", ID_UPPERCASE_ENTRY, 136, 95, 114, 8,
+                        ES_MARGIN | WS_GROUP
+        LTEXT           "Hexadecimal-only", -1, 8, 80, 130, 8
+        ENTRYFIELD      "", ID_HEX_ENTRY, 136, 80, 114, 8,
+                        ES_MARGIN | WS_GROUP
+        LTEXT           "Uppercase, hexadecimal-only", -1,
+                        8, 65, 130, 8
+        ENTRYFIELD      "", ID_UPPERCASE_HEX_ENTRY,
+                        136, 65, 114, 8, ES_MARGIN | WS_GROUP
+        LTEXT           "Uppercase, hexadecimal-only", -1,
+                        8, 50, 130, 8
+        CONTROL         "", ID_UPPERCASE_HEX_COMBO,
+                        134, 25, 117, 35,
+                        WC_COMBOBOX, CBS_DROPDOWN | WS_GROUP |
+                        WS_TABSTOP | WS_VISIBLE
+        LTEXT           "Uppercase, hexadecimal-only", -1,
+                        8, 35, 130, 8
+        MLE             "", ID_UPPERCASE_HEX_MLE,
+                        134, 4, 117, 41,
+                        MLS_WORDWRAP | MLS_HSCROLL |
+                        MLS_VSCROLL | MLS_IGNORETAB | WS_GROUP
+        DEFPUSHBUTTON   "OK", ID_CLOSE, 4, 2, 49, 14,
+                        BS_SYSCOMMAND | WS_GROUP
+    END
+END
+
+#else /* Windows resource */
+
+ID_KEYBD_DIALOG DIALOG 12, 42, 260, 220
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION |
+      WS_SYSMENU
+CAPTION "Keyboard Handler Example"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT       "Uppercase and hexadecimal keyboard handlers.",
+                -1, 3, 7, 185, 8
+    LTEXT       "Unfiltered input (no handlers)",
+                -1, 6, 23, 120, 8
+    EDITTEXT    ID_ANY_ENTRY, 140, 21, 110, 12, ES_AUTOHSCROLL
+    LTEXT       "Uppercase input", -1, 6, 44, 120, 8
+    EDITTEXT    ID_UPPERCASE_ENTRY, 140, 43, 110, 12,
+                ES_AUTOHSCROLL
+    LTEXT       "Hexadecimal only", -1, 6, 68, 120, 8
+    EDITTEXT    ID_HEX_ENTRY, 140, 65, 110, 12, ES_AUTOHSCROLL
+    LTEXT       "Uppercase, hexadecimal-only", -1, 6, 91, 120, 8
+    EDITTEXT    ID_UPPERCASE_HEX_ENTRY, 140, 91, 110, 12,
+                ES_AUTOHSCROLL
+    LTEXT       "Uppercase, hexadecimal-only",
+                -1, 6, 114, 120, 8
+    COMBOBOX    ID_UPPERCASE_HEX_COMBO, 140, 113, 110, 35,
+                CBS_DROPDOWN | CBS_SORT | WS_VSCROLL |
+                WS_TABSTOP
+    LTEXT       "Uppercase, hexadecimal-only",
+                -1, 6, 142, 120, 8
+    EDITTEXT    ID_UPPERCASE_HEX_MLE, 140, 142, 110, 49,
+                ES_MULTILINE
+    PUSHBUTTON  "OK", ID_CLOSE, 10, 199, 55, 14
+END
+
+#endif
+

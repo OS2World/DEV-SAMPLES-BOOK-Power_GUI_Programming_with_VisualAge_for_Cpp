@@ -1,0 +1,23 @@
+## Tool Bars - Tool Bar Group Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\tbargrps.exe
+
+$(ODIR)\tbargrps.exe :  $(ODIR)\tbargrps.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\tbargrps.exe $(ODIR)\tbargrps.obj
+
+$(ODIR)\tbargrps.obj: tbargrps.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\tbargrps.obj  tbargrps.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

@@ -1,0 +1,22 @@
+## Button Controls - Push Button Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\pushbut.exe
+
+$(ODIR)\pushbut.exe :  $(ODIR)\pushbut.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\pushbut.exe $(ODIR)\pushbut.obj
+
+$(ODIR)\pushbut.obj: pushbut.cpp pushbut.h
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\pushbut.obj  pushbut.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

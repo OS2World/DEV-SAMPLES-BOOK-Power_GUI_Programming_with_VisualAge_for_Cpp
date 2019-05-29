@@ -1,0 +1,9 @@
+[OPTIONS]
+CONTENTS=PANEL_CONTENTS
+
+[FILES]
+helptbl.rtf
+
+[MAP]
+#include hlppanel.h
+

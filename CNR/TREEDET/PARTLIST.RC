@@ -1,0 +1,24 @@
+/************************************************************
+/ Container - Combined Tree and Details View
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include "partlist.h"
+
+#ifdef IC_PM
+#include <os2.h>
+#endif
+
+STRINGTABLE
+  BEGIN
+    EX_PARTLIST_FRAME,   "Parts List"
+    EX_COLUMN_TRACEABLE, "Traceable"
+    EX_COLUMN_ENABLED,   "Enabled"
+    EX_COLUMN_GENTRACE,  "Generate Trace"
+    EX_COLUMN_TRIGGER,   "Has Trigger"
+  END
+
+
+

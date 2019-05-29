@@ -1,0 +1,22 @@
+## Static Controls - Static Text on a Canvas  Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\textcv.exe
+
+$(ODIR)\textcv.exe :  $(ODIR)\textcv.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\textcv.exe $(ODIR)\textcv.obj
+
+$(ODIR)\textcv.obj: textcv.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\textcv.obj  textcv.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

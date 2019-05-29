@@ -1,0 +1,40 @@
+## Direct Manipulation - Menu Drag Example            
+
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+ORES=$(ODIR)\menudrag.res
+RC=rc.exe -DIC_PM
+!else
+ODIR=.\win
+ORES=
+RC=irc.exe -Fo$(ODIR)\menudrag.res
+!endif
+
+
+ALL :  CREATEDIR  $(ODIR)\menudrag.exe
+
+$(ODIR)\menudrag.exe : $(ODIR)\menudrag.obj $(ODIR)\menudrag.res $(ODIR)\cmditem.obj 
+!ifdef IC_PM
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\menudrag.exe $(ODIR)\menudrag.obj $(ODIR)\cmditem.obj  
+   $(RC) $(ODIR)\menudrag.res $(ODIR)\menudrag.exe
+!else
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\menudrag.exe \
+       $(ODIR)\menudrag.obj  $(ODIR)\cmditem.obj $(ODIR)\menudrag.res
+!endif
+
+
+$(ODIR)\menudrag.obj: menudrag.cpp cmditem.hpp 
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\menudrag.obj menudrag.cpp
+
+$(ODIR)\cmditem.obj: cmditem.cpp cmditem.hpp 
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\cmditem.obj cmditem.cpp
+
+$(ODIR)\menudrag.res: menudrag.rc
+   $(RC) -r menudrag.rc $(ORES)
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

@@ -1,0 +1,21 @@
+/************************************************************
+/ Container Control - Tree Icon View
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include "treeicov.h"
+
+#ifdef IC_PM
+#define  INCL_PM
+#include <os2.h>
+
+ICON ICON_FOLDER   .\os2\folder.ico
+
+#else /* Windows resources */
+
+ICON_FOLDER ICON   .\win\folder.ico
+
+#endif
+

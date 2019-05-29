@@ -1,0 +1,43 @@
+/*********************************************************
+/ Frame Window Basics - Information Area for the System Menu
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+/*********************************************************/
+#include <icconst.h>
+
+#ifdef IC_PM
+  #define INCL_WIN
+  #define INCL_WINFRAMEMGR  /* For SC_* */
+  #include <os2.h>
+
+#ifndef IC_ID_CLOSE
+  /* Define these constants which do not exist on */
+  /* VisualAge C++ for OS/2, Version 3.0.         */
+  #define IC_ID_CLOSE       SC_CLOSE
+  #define IC_ID_MOVE        SC_MOVE
+  #define IC_ID_SIZE        SC_SIZE
+  #define IC_ID_MINIMIZE    SC_MINIMIZE
+  #define IC_ID_MAXIMIZE    SC_MAXIMIZE
+  #define IC_ID_SYSHIDE     SC_HIDE
+  #define IC_ID_RESTORE     SC_RESTORE
+  #define IC_ID_WINDOWLIST  SC_TASKMANAGER
+#endif
+
+#endif
+
+STRINGTABLE
+  BEGIN
+   IC_ID_RESTORE   "Restore the frame window size and position."
+   IC_ID_MOVE        "Move the frame window."
+   IC_ID_SIZE        "Size the frame window."
+   IC_ID_MINIMIZE    "Minimize the frame window."
+   IC_ID_MAXIMIZE    "Maximize the frame window."
+#ifdef IC_PM
+   IC_ID_SYSHIDE     "Hide the frame window."
+#endif
+   IC_ID_CLOSE       "Close the frame window."
+   IC_ID_WINDOWLIST  "Show the system window list."
+  END
+

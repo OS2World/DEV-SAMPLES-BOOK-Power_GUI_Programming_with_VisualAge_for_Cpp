@@ -1,0 +1,59 @@
+################################################################
+# FILE NAME: makefile                                          #
+#                                                              #
+# DESCRIPTION:                                                 #
+#   makefile for the ultimate IThread demo program             #
+#                                                              #
+# COPYRIGHT:                                                   #
+#   Licensed Materials - Property of Solution Frameworks       #
+#   Copyright (C) 1996, Solution Frameworks                    #
+#   All Rights Reserved                                        #
+################################################################
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+INC    =
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+ORES=$(ODIR)\threads.res
+RC=rc.exe -DIC_PM
+!else
+ODIR=.\win
+ORES=
+RC=irc.exe -Fo$(ODIR)\threads.res
+!endif
+
+ALL : CREATEDIR SIGNAL $(ODIR)\threads.exe
+
+OBJLIST = $(ODIR)\threads.obj \
+          $(ODIR)\thread.obj  \
+          ..\signal\$(ODIR)\signal.obj
+
+$(ODIR)\threads.exe :  $(OBJLIST) $(ODIR)\threads.res
+!ifdef IC_PM
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$@ $(OBJLIST)
+   $(RC) $(ODIR)\threads.res $@
+!else
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$@ $**
+!endif
+
+$(ODIR)\threads.obj: threads.cpp threads.h thread.hpp cmdroutr.hpp
+   icc $(CFLAGS) /C+ /Fo$@ threads.cpp
+
+$(ODIR)\thread.obj: threads.cpp threads.h thread.hpp ..\signal\signal.hpp
+   icc $(CFLAGS) /I..\signal /C+ /Fo$@ thread.cpp
+
+$(ODIR)\threads.res:  threads.rc \
+                      threads.h \
+
+   $(RC) -r threads.rc $(ORES)
+
+CREATEDIR:
+  @if not exist $(ODIR) md $(ODIR)
+
+SIGNAL :
+  cd ..\signal
+  nmake
+  cd ..\threads
+
+

@@ -1,0 +1,48 @@
+################################################################
+# FILE NAME: makefile                                          #
+#                                                              #
+# DESCRIPTION:                                                 #
+#   makefile for "calculate pi on a thread" sample program     #
+#                                                              #
+# COPYRIGHT:                                                   #
+#   Licensed Materials - Property of Solution Frameworks       #
+#   Copyright (C) 1996, Solution Frameworks                    #
+#   All Rights Reserved                                        #
+################################################################
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+INC    = /I..\pi /I..\userevt
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL :  CREATEDIR PI USEREVT $(ODIR)\pithread.exe
+
+$(ODIR)\pithread.exe : $(ODIR)\pithread.obj \
+                       ..\pi\$(ODIR)\pi.obj \
+                       ..\userevt\$(ODIR)\userevt.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$@ $**
+
+$(ODIR)\pithread.obj : pithread.cpp \
+                       ..\pi\pi.hpp \
+                       ..\userevt\userevt.hpp
+   icc $(CFLAGS) $(INC) /C+ /Fo$@ pithread.cpp
+
+PI :
+  cd ..\pi
+  nmake
+  cd ..\pithread
+
+USEREVT :
+  cd ..\userevt
+  nmake
+  cd ..\pithread
+
+CREATEDIR:
+  @if not exist $(ODIR) md $(ODIR)
+
+

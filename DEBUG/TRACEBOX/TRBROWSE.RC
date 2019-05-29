@@ -1,0 +1,96 @@
+/************************************************************
+/ Problem Determination  - Trace Queue Browser
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include "trbrowse.h"
+
+#ifdef IC_PM   /* os2 resources */
+
+ICON   WND_MAIN   ".\\os2\\osfindr.ico"
+
+/***************************************************************************
+// Menu bar for main window - used by IMenuBar Class                       *
+***************************************************************************/
+MENU WND_MAIN
+  BEGIN
+    SUBMENU        "~File"               , MI_FILE
+      BEGIN
+        MENUITEM   "E~xit"               , MI_EXIT
+      END
+    SUBMENU        "~Selected"           , MI_SELECTED
+      BEGIN
+        MENUITEM   "Cu~t"                , MI_CUT
+        MENUITEM   "~Copy"               , MI_COPY
+        MENUITEM   "Cle~ar all"          , MI_CLEAR
+        MENUITEM   "~Select all"         , MI_SELECTALL
+        MENUITEM   "Dese~lect all"       , MI_DESELECTALL
+      END
+    SUBMENU        "~View"               , MI_VIEW
+      BEGIN
+        MENUITEM   "~Include..."         , MI_INCLUDE
+        MENUITEM   "Include ~all"        , MI_INCLUDEALL
+        MENUITEM   "Input ~filter..."    , MI_INPUTFILTER
+        MENUITEM   "Auto~scroll"         , MI_AUTOSCROLL
+      END
+    MENUITEM       "S~top"               , MI_START
+    SUBMENU        "~Help"               , MI_HELP
+      BEGIN
+        MENUITEM   "~Product Information", MI_ABOUT
+      END
+  END
+
+STRINGTABLE
+  BEGIN
+     WND_MAIN     , "Trace Browser"
+     ABOUT_TEXT   , "Trace monitor program\015- Copyright (C) 1994,1996 Law, Leong, Love, Olson, Tsuji."
+     START_TEXT   , "S~tart"
+     STOP_TEXT    , "S~top"
+  END
+
+#else    /* Windows resources */
+
+WND_MAIN          ICON       ".\win\osfindr.ico"
+
+WND_MAIN  MENUEX
+  BEGIN
+    POPUP         "&File"                    ,  MI_FILE
+      BEGIN
+        MENUITEM  "E&xit"                    ,  MI_EXIT
+      END
+    POPUP         "&Selected"                ,  MI_SELECTED
+      BEGIN
+        MENUITEM  "Cu&t"                     ,  MI_CUT
+        MENUITEM  "&Copy"                    ,  MI_COPY
+        MENUITEM  "Cle&ar all"               ,  MI_CLEAR
+        MENUITEM  "&Select all"              ,  MI_SELECTALL
+        MENUITEM  "Dese&lect all"            ,  MI_DESELECTALL
+      END
+    POPUP         "&View"                    ,  MI_VIEW
+      BEGIN
+        MENUITEM  "&Include..."              ,  MI_INCLUDE
+        MENUITEM  "Include &all"             ,  MI_INCLUDEALL
+        MENUITEM  "Input &filter..."         ,  MI_INPUTFILTER
+        MENUITEM  "Auto&scroll"              ,  MI_AUTOSCROLL
+      END
+    MENUITEM      "S&top"                    ,  MI_START
+    POPUP         "&Help"                    ,  MI_HELP
+      BEGIN
+        MENUITEM  "&Product Information"     ,  MI_ABOUT
+      END
+  END
+
+STRINGTABLE
+  BEGIN
+    WND_MAIN     , "Trace Browser"
+    ABOUT_TEXT   , "Trace monitor program\015- Copyright (C) 1994,1996 Law, Leong, Love, Olson, Tsuji."
+    START_TEXT   , "S&tart"
+    STOP_TEXT    , "S&top"
+  END
+
+#endif
+
+rcinclude "filtdlg.rc"
+

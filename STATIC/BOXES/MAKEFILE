@@ -1,0 +1,25 @@
+## Static Controls - Group Box and Outline Box Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR  $(ODIR)\boxes.exe
+
+$(ODIR)\boxes.exe :  $(ODIR)\boxes.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\boxes.exe $(ODIR)\boxes.obj
+
+$(ODIR)\boxes.obj: boxes.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\boxes.obj  boxes.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+
+
+

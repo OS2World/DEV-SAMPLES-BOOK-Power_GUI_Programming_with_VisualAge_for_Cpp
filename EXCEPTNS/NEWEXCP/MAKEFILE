@@ -1,0 +1,26 @@
+## Error Handling - New Exception Class 
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = 
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL :  CREATEDIR  $(ODIR)\newexcp.exe
+
+$(ODIR)\newexcp.exe :  $(ODIR)\custexcp.obj $(ODIR)\newexcp.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\newexcp.exe $(ODIR)\custexcp.obj $(ODIR)\newexcp.obj
+
+$(ODIR)\custexcp.obj: custexcp.cpp custexcp.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\custexcp.obj  custexcp.cpp 
+
+$(ODIR)\newexcp.obj: newexcp.cpp custexcp.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\newexcp.obj  newexcp.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

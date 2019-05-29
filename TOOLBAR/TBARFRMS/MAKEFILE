@@ -1,0 +1,23 @@
+## Tool Bars - Tool Bar Floating Frames
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\tbarfrms.exe
+
+$(ODIR)\tbarfrms.exe :  $(ODIR)\tbarfrms.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\tbarfrms.exe $(ODIR)\tbarfrms.obj
+
+$(ODIR)\tbarfrms.obj: tbarfrms.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\tbarfrms.obj  tbarfrms.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

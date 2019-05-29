@@ -1,0 +1,23 @@
+## Frame Window Basics - Defer Destroy on Frame Closing
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\dismiss.exe
+
+$(ODIR)\dismiss.exe : $(ODIR)\dismiss.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\dismiss.exe $(ODIR)\dismiss.obj
+
+$(ODIR)\dismiss.obj: dismiss.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\dismiss.obj dismiss.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

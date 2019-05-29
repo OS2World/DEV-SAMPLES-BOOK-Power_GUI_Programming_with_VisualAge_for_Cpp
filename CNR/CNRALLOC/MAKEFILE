@@ -1,0 +1,23 @@
+## Container Control - ICnrAllocator Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\cnralloc.exe
+
+$(ODIR)\cnralloc.exe :  $(ODIR)\cnralloc.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\cnralloc.exe $(ODIR)\cnralloc.obj
+
+$(ODIR)\cnralloc.obj: cnralloc.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\cnralloc.obj  cnralloc.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

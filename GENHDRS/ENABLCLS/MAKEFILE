@@ -1,0 +1,23 @@
+## Reusable Commands - Disable the Close Command
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\enablcls.exe
+
+$(ODIR)\enablcls.exe : $(ODIR)\enablcls.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\enablcls.exe $(ODIR)\enablcls.obj
+
+$(ODIR)\enablcls.obj: enablcls.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\enablcls.obj enablcls.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

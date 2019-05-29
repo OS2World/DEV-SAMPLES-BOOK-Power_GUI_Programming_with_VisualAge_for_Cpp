@@ -1,0 +1,24 @@
+## Data Types - Using an IString as a Data Buffer 
+
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS =
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\cipher.exe
+
+$(ODIR)\cipher.exe :  $(ODIR)\cipher.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\cipher.exe $(ODIR)\cipher.obj
+
+$(ODIR)\cipher.obj: cipher.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\cipher.obj  cipher.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

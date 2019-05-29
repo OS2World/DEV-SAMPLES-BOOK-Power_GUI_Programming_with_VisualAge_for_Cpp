@@ -1,0 +1,30 @@
+## Direct Manipulation - List Box Example
+
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL :  CREATEDIR  $(ODIR)\lboxdrag.exe
+
+$(ODIR)\lboxdrag.exe : $(ODIR)\lboxdrag.obj $(ODIR)\lboxitem.obj
+!IFDEF IC_PM
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\lboxdrag.exe $(ODIR)\lboxdrag.obj $(ODIR)\lboxitem.obj
+!ELSE
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\lboxdrag.exe user32.lib $(ODIR)\lboxdrag.obj $(ODIR)\lboxitem.obj
+!ENDIF
+
+$(ODIR)\lboxdrag.obj: lboxdrag.cpp lboxitem.hpp 
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\lboxdrag.obj lboxdrag.cpp
+
+$(ODIR)\lboxitem.obj: lboxitem.cpp lboxitem.hpp 
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\lboxitem.obj lboxitem.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

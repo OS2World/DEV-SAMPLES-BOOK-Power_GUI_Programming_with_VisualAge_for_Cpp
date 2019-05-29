@@ -1,0 +1,21 @@
+## Problem Determination - Termination Signal Handler
+
+CFLAGS = /Tm+ /Ti+ /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:VIO
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+ALL : CREATEDIR $(ODIR)\sigterm.exe
+
+$(ODIR)\sigterm.exe : $(ODIR)\sigterm.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$@ $**
+
+{.}.cpp{$(ODIR)}.obj:
+   icc $(CFLAGS) /C+ -Fo$@ $(*B).cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

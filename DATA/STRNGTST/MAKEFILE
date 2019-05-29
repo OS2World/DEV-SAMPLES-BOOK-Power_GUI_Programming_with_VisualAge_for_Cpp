@@ -1,0 +1,22 @@
+## Data Types - Using an IStringTest 
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS =
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\strngtst.exe
+
+$(ODIR)\strngtst.exe :  $(ODIR)\strngtst.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\strngtst.exe $(ODIR)\strngtst.obj
+
+$(ODIR)\strngtst.obj: strngtst.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\strngtst.obj  strngtst.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

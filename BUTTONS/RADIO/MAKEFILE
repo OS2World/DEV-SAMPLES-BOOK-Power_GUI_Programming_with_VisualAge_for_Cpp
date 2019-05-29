@@ -1,0 +1,22 @@
+## Button Controls - Radio Button Select Handler
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\radio.exe
+
+$(ODIR)\radio.exe :  $(ODIR)\radio.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\radio.exe $(ODIR)\radio.obj
+
+$(ODIR)\radio.obj: radio.cpp radio.h
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\radio.obj  radio.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

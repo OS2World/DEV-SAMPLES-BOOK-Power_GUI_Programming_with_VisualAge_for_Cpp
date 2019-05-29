@@ -1,0 +1,23 @@
+## Data Types - Using the IString Conversion Functions
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS =
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\convert.exe
+
+$(ODIR)\convert.exe :  $(ODIR)\convert.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\convert.exe $(ODIR)\convert.obj
+
+$(ODIR)\convert.obj: convert.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\convert.obj  convert.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

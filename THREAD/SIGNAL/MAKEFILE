@@ -1,0 +1,31 @@
+################################################################
+# FILE NAME: makefile                                          #
+#                                                              #
+# DESCRIPTION:                                                 #
+#   makefile for signal.obj (event semaphore class used by     #
+#   thread sample programs)                                    #
+#                                                              #
+# COPYRIGHT:                                                   #
+#   Licensed Materials - Property of Solution Frameworks       #
+#   Copyright (C) 1996, Solution Frameworks                    #
+#   All Rights Reserved                                        #
+################################################################
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:VIO
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL :  CREATEDIR  $(ODIR)\signal.obj
+
+$(ODIR)\signal.obj: signal.cpp signal.hpp
+   icc $(CFLAGS) /C+ /Fo$@ signal.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR) md $(ODIR)
+
+

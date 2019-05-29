@@ -1,0 +1,23 @@
+## Tool Bars - Tool Bar Container With Multiple Tool Bars
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\tbarmult.exe
+
+$(ODIR)\tbarmult.exe :  $(ODIR)\tbarmult.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\tbarmult.exe $(ODIR)\tbarmult.obj
+
+$(ODIR)\tbarmult.obj: tbarmult.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\tbarmult.obj  tbarmult.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

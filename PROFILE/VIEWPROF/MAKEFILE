@@ -1,0 +1,29 @@
+## Profile - Profile Viewer Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS =
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\viewprof.exe
+
+$(ODIR)\viewprof.exe :  $(ODIR)\vprofarg.obj $(ODIR)\viewprof.obj $(ODIR)\enhprof.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\viewprof.exe  $(ODIR)\vprofarg.obj $(ODIR)\viewprof.obj $(ODIR)\enhprof.obj
+
+
+$(ODIR)\vprofarg.obj: vprofarg.cpp vprofarg.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\vprofarg.obj  vprofarg.cpp
+
+$(ODIR)\viewprof.obj: viewprof.cpp vprofarg.hpp enhprof.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\viewprof.obj  viewprof.cpp
+
+$(ODIR)\enhprof.obj: enhprof.cpp enhprof.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\enhprof.obj  enhprof.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

@@ -1,0 +1,22 @@
+## Menus - Accessing the System Menu
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL :  CREATEDIR  $(ODIR)\sysmenu.exe
+
+$(ODIR)\sysmenu.exe : $(ODIR)\sysmenu.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\sysmenu.exe $(ODIR)\sysmenu.obj
+
+$(ODIR)\sysmenu.obj : sysmenu.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\sysmenu.obj sysmenu.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

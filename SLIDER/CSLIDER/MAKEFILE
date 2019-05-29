@@ -1,0 +1,22 @@
+## Sliders - Circular Slider Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\cslider.exe
+
+$(ODIR)\cslider.exe : $(ODIR)\cslider.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\cslider.exe $(ODIR)\cslider.obj
+
+$(ODIR)\cslider.obj: cslider.cpp cslider.hpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\cslider.obj cslider.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

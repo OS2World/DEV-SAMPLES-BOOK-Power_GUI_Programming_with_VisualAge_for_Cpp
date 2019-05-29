@@ -1,0 +1,22 @@
+## Canvas - ISplitCanvas with Static Text Child Windows
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\splittxt.exe
+
+$(ODIR)\splittxt.exe : $(ODIR)\splittxt.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\splittxt.exe $(ODIR)\splittxt.obj
+
+$(ODIR)\splittxt.obj: splittxt.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\splittxt.obj splittxt.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

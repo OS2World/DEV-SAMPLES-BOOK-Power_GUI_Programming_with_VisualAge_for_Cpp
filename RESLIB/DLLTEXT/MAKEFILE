@@ -1,0 +1,41 @@
+## Using Resources - Building a Resource DLL
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+DFLAGS = /Ft- /Gd+ /Ge- /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS =
+
+!ifdef IC_PM
+ODIR=.\os2
+ORES=$(ODIR)\myeng.res
+RC=rc.exe -DIC_PM
+!else
+ODIR=.\win
+ORES=
+RC=irc.exe -Fo$(ODIR)\myeng.res
+!endif
+
+ALL :  CREATEDIR  $(ODIR)\dlltext.exe $(ODIR)\myeng.dll
+
+$(ODIR)\dlltext.exe : $(ODIR)\dlltext.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\dlltext.exe $(ODIR)\dlltext.obj
+
+$(ODIR)\myeng.dll   : $(ODIR)\dummy.obj $(ODIR)\myeng.res
+!ifdef IC_PM
+   icc $(DFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\myeng.dll $(ODIR)\dummy.obj myeng.def
+   $(RC) $(ODIR)\myeng.res $(ODIR)\myeng.dll
+!else
+   icc $(DFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\myeng.dll $(ODIR)\dummy.obj $(ODIR)\myeng.res
+!endif
+
+$(ODIR)\dlltext.obj : dlltext.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\dlltext.obj dlltext.cpp
+
+$(ODIR)\dummy.obj   : dummy.cpp
+   icc $(DFLAGS) /C+ /Fo$(ODIR)\dummy.obj dummy.cpp
+
+$(ODIR)\myeng.res   : myeng.rc mytext.h
+   $(RC) -r myeng.rc $(ORES)
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

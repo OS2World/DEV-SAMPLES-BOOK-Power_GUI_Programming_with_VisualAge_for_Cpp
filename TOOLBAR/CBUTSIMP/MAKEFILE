@@ -1,0 +1,23 @@
+## Tool Bars - Simple Custom Button Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\cbutsimp.exe
+
+$(ODIR)\cbutsimp.exe :  $(ODIR)\cbutsimp.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\cbutsimp.exe $(ODIR)\cbutsimp.obj
+
+$(ODIR)\cbutsimp.obj: cbutsimp.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\cbutsimp.obj  cbutsimp.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

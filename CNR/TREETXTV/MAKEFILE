@@ -1,0 +1,22 @@
+## Container Control - Tree Name View
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\treetxtv.exe
+
+$(ODIR)\treetxtv.exe :  $(ODIR)\treetxtv.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\treetxtv.exe $(ODIR)\treetxtv.obj
+
+$(ODIR)\treetxtv.obj: treetxtv.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\treetxtv.obj  treetxtv.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

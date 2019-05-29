@@ -1,0 +1,23 @@
+## Frame Window Basics - Accessing the Title Bar
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\titlebar.exe
+
+$(ODIR)\titlebar.exe : $(ODIR)\titlebar.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\titlebar.exe $(ODIR)\titlebar.obj
+
+$(ODIR)\titlebar.obj: titlebar.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\titlebar.obj titlebar.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

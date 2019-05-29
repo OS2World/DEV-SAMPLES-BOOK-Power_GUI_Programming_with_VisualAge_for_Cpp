@@ -1,0 +1,23 @@
+## Direct Manipulation - Drag Information Viewer Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL :  CREATEDIR  $(ODIR)\dragview.exe
+
+$(ODIR)\dragview.exe : $(ODIR)\dragview.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\dragview.exe $(ODIR)\dragview.obj
+
+$(ODIR)\dragview.obj: dragview.cpp dragview.hpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\dragview.obj dragview.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

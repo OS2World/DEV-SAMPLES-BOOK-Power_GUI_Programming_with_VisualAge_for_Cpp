@@ -1,0 +1,23 @@
+## Fonts - Using Advanced Font Functions
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL :  CREATEDIR  $(ODIR)\advfont.exe
+
+$(ODIR)\advfont.exe : $(ODIR)\advfont.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\advfont.exe $(ODIR)\advfont.obj
+
+$(ODIR)\advfont.obj : advfont.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\advfont.obj advfont.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

@@ -1,0 +1,27 @@
+## Menus - Dynamic Accelerator Keys
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\dynaccel.exe
+
+$(ODIR)\dynaccel.exe : $(ODIR)\dynaccel.obj $(ODIR)\accelupd.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\dynaccel.exe \
+       $(ODIR)\dynaccel.obj $(ODIR)\accelupd.obj
+
+$(ODIR)\dynaccel.obj: dynaccel.cpp accelupd.hpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\dynaccel.obj dynaccel.cpp
+
+$(ODIR)\accelupd.obj: accelupd.hpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\accelupd.obj accelupd.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

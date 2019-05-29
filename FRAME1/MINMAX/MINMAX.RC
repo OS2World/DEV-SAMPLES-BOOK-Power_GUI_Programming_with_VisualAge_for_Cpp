@@ -1,0 +1,43 @@
+/**********************************************************
+/ Frame Window Basics - Minimize/Maximize Handler Example
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+**********************************************************/
+#include <icconst.h>
+
+#ifdef IC_PM /* OS/2 resource */
+
+#include <os2.h>
+
+ICON IC_DEFAULT_FRAME_ID .\os2\minmax.ico
+
+DLGTEMPLATE IC_DEFAULT_FRAME_ID LOADONCALL MOVEABLE DISCARDABLE
+  BEGIN
+    DIALOG  "Minimize/Maximize Example", IC_DEFAULT_FRAME_ID, 8, 5, 230, 200, ,
+            FCF_SYSMENU | FCF_TITLEBAR | FCF_MINBUTTON | FCF_MAXBUTTON | FCF_SIZEBORDER | FCF_TASKLIST | FCF_ICON
+      BEGIN
+        LTEXT "You can minimize or maximize this frame window.",
+              1, 0, 0, 230, 170, NOT WS_GROUP
+      END
+  END
+
+#else /* Windows resource */
+
+IC_DEFAULT_FRAME_ID ICON .\win\minmax.ico
+
+IC_DEFAULT_FRAME_ID DIALOG LOADONCALL MOVEABLE DISCARDABLE 8, 5, 200, 200
+CAPTION "Minimize/Maximize Example" STYLE
+            WS_SYSMENU | WS_CAPTION | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_THICKFRAME
+  BEGIN
+    CONTROL "You can minimize or maximize this frame window.",
+            1, "static", SS_LEFT | WS_CHILD, 0, 0, 190, 170
+  END
+
+#endif
+
+STRINGTABLE PRELOAD
+{
+  IC_DEFAULT_FRAME_ID,  "Minimize/Maximize Example"
+}

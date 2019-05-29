@@ -1,0 +1,21 @@
+## Problem Determination - Finding an Invisible Window
+
+CFLAGS = /Ti+ /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+ALL : CREATEDIR $(ODIR)\invisibl.exe
+
+$(ODIR)\invisibl.exe : $(ODIR)\invisibl.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$@ $**
+
+{.}.cpp{$(ODIR)}.obj:
+   icc $(CFLAGS) /C+ -Fo$@ $(*B).cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

@@ -1,0 +1,37 @@
+/************************************************************
+/ Views - Using the File Dialog
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include "filedlg.h"
+
+#ifdef IC_PM   /* OS/2 resources */
+#include <os2.h>
+
+MENU MAIN_WINDOW
+BEGIN
+  SUBMENU  "~File",         MI_FILE
+    BEGIN
+      MENUITEM "~Open...",     MI_OPENDLG
+      MENUITEM "~Save As...",  MI_SAVEASDLG
+      MENUITEM SEPARATOR
+      MENUITEM "E~xit",        MI_EXIT
+    END
+END
+#else    /* Windows resources */
+#include <windows.h>
+
+MAIN_WINDOW  MENUEX
+BEGIN
+  POPUP     "&File",        MI_FILE
+    BEGIN
+      MENUITEM "&Open...",     MI_OPENDLG
+      MENUITEM "&Save As...",  MI_SAVEASDLG
+      MENUITEM SEPARATOR
+      MENUITEM "E&xit",        MI_EXIT
+    END
+END
+#endif
+

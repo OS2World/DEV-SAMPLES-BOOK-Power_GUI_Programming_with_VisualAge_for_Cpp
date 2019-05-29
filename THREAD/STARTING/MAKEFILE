@@ -1,0 +1,34 @@
+################################################################
+# FILE NAME: makefile                                          #
+#                                                              #
+# DESCRIPTION:                                                 #
+#   makefile for the IThread::start demo program               #
+#                                                              #
+# COPYRIGHT:                                                   #
+#   Licensed Materials - Property of Solution Frameworks       #
+#   Copyright (C) 1996, Solution Frameworks                    #
+#   All Rights Reserved                                        #
+################################################################
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL :  CREATEDIR  $(ODIR)\starting.exe
+
+!ifdef IC_PM
+$(ODIR)\starting.exe :  starting.cpp
+!else
+$(ODIR)\starting.exe :  starting.cpp wrapper.hpp
+!endif
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fo$(ODIR)\starting.obj /Fe$@ starting.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR) md $(ODIR)
+
+

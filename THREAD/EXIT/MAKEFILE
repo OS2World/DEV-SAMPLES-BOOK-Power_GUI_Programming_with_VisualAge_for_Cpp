@@ -1,0 +1,33 @@
+################################################################
+# FILE NAME: makefile                                          #
+#                                                              #
+# DESCRIPTION:                                                 #
+#   makefile for thread exit test program                      #
+#                                                              #
+# COPYRIGHT:                                                   #
+#   Licensed Materials - Property of Solution Frameworks       #
+#   Copyright (C) 1996, Solution Frameworks                    #
+#   All Rights Reserved                                        #
+################################################################
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:VIO
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL :  CREATEDIR  $(ODIR)\threadex.exe
+
+$(ODIR)\threadex.exe :  $(ODIR)\threadex.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\threadex.exe $(ODIR)\threadex.obj
+
+$(ODIR)\threadex.obj: threadex.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\threadex.obj  threadex.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR) md $(ODIR)
+
+

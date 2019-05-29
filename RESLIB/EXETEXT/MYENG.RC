@@ -1,0 +1,21 @@
+/************************************************************
+/ Using Resources - Resources in the EXE
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include "mytext.h"
+
+#ifdef IC_PM   /* OS/2 resources    */
+#include <os2.h>
+#else          /* Windows resources */
+#include <windows.h>
+#endif
+
+STRINGTABLE PRELOAD
+BEGIN
+ MY_TEXT,     "Using resources is easy"
+END
+
+

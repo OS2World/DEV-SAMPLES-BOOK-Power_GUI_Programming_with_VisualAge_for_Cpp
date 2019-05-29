@@ -1,0 +1,35 @@
+## Canvas - Lunch Dialog Using ISetCanvas
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+ORES=$(ODIR)\setlunch.res
+RC=rc.exe -DIC_PM
+!else
+ODIR=.\win
+ORES=
+RC=irc.exe -Fo$(ODIR)\setlunch.res
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\setlunch.exe
+
+$(ODIR)\setlunch.exe : $(ODIR)\setlunch.obj $(ODIR)\setlunch.res
+!ifdef IC_PM
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\setlunch.exe $(ODIR)\setlunch.obj
+   $(RC) $(ODIR)\setlunch.res $(ODIR)\setlunch.exe
+!else
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\setlunch.exe $(ODIR)\setlunch.obj \
+       $(ODIR)\setlunch.res
+!endif
+
+$(ODIR)\setlunch.obj: setlunch.cpp pushbtns.hpp setlunch.h
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\setlunch.obj setlunch.cpp
+
+$(ODIR)\setlunch.res: setlunch.rc setlunch.h
+   $(RC) -r setlunch.rc $(ORES)
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

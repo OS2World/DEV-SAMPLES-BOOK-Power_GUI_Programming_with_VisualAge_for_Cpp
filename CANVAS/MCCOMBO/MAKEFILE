@@ -1,0 +1,23 @@
+## Canvas - IMultiCellCanvas with Combination Boxes 
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\mccombo.exe
+
+$(ODIR)\mccombo.exe : $(ODIR)\mccombo.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\mccombo.exe $(ODIR)\mccombo.obj
+
+$(ODIR)\mccombo.obj: mccombo.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\mccombo.obj mccombo.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

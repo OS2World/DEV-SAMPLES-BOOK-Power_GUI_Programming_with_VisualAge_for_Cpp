@@ -1,0 +1,55 @@
+/**********************************************************
+/ Canvas - Lunch Dialog Using ISetCanvas
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+**********************************************************/
+#include "setlunch.h"
+
+#ifdef IC_PM /* OS/2 resources */
+
+#include <os2.h>
+
+STRINGTABLE PRELOAD
+BEGIN
+  ID_LUNCH_TEXT,     "Select your lunch preferences:"
+  ID_FOOD,           "Food"
+  ID_HAMBURGER,      "~Hamburger"
+  ID_CHEESEBURGER,   "~Cheeseburger"
+  ID_HOTDOG,         "Hot ~dog"
+  ID_PIZZA,          "~Pizza"
+  ID_BEVERAGE,       "Beverage"
+  ID_MILK,           "~Milk"
+  ID_SOFTDRINK,      "~Soft drink"
+  ID_JUICE,          "~Juice"
+  ID_WATER,          "~Water"
+  ID_SIDEORDERS,     "Side orders"
+  ID_SALAD,          "Sa~lad"
+  ID_FRIES,          "~French fries"
+  ID_REQUESTPROMPT,  "Other"
+END
+
+#else /* Windows resources */
+
+STRINGTABLE PRELOAD
+BEGIN
+  ID_LUNCH_TEXT,     "Select your lunch preferences:"
+  ID_FOOD,           "Food"
+  ID_HAMBURGER,      "&Hamburger"
+  ID_CHEESEBURGER,   "&Cheeseburger"
+  ID_HOTDOG,         "Hot &dog"
+  ID_PIZZA,          "&Pizza"
+  ID_BEVERAGE,       "Beverage"
+  ID_MILK,           "&Milk"
+  ID_SOFTDRINK,      "&Soft drink"
+  ID_JUICE,          "&Juice"
+  ID_WATER,          "&Water"
+  ID_SIDEORDERS,     "Side orders"
+  ID_SALAD,          "Sa&lad"
+  ID_FRIES,          "&French fries"
+  ID_REQUESTPROMPT,  "Other"
+END
+
+#endif
+

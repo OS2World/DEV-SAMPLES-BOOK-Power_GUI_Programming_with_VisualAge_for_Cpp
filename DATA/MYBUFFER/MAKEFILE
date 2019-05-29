@@ -1,0 +1,23 @@
+## Data Types - Replacing the IString's IBuffer Object 
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS =
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\mybuffer.exe
+
+$(ODIR)\mybuffer.exe :  $(ODIR)\mybuffer.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\mybuffer.exe $(ODIR)\mybuffer.obj
+
+$(ODIR)\mybuffer.obj: mybuffer.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\mybuffer.obj  mybuffer.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

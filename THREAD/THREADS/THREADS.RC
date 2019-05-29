@@ -1,0 +1,144 @@
+/*******************************************************************************
+* FILE NAME: threads.rc                                                        *
+*                                                                              *
+* DESCRIPTION:                                                                 *
+*                                                                              *
+* COPYRIGHT:                                                                   *
+*   Licensed Materials - Property of Solution Frameworks                       *
+*   Copyright (C) 1996, Solution Frameworks                                    *
+*   All Rights Reserved                                                        *
+*******************************************************************************/
+#include "threads.h"
+
+#ifdef IC_PM
+  ICON THREADS .\os2\threads.ico
+  ICON THREAD1 .\os2\thread1.ico
+#else
+  THREADS ICON .\win\threads.ico
+  THREAD1 ICON .\win\thread1.ico
+#endif
+
+STRINGTABLE
+  BEGIN
+    THREAD_IDLE     "Idle"
+    THREAD_REGULAR  "Regular"
+    THREAD_TIMECRIT "Time Critical"
+    THREAD_FORE     "Foreground Server"
+  END
+
+#ifdef IC_PM
+  MENU THREADS_POPUP
+    BEGIN
+      MENUITEM "New", THREADS_NEW
+      MENUITEM "Exit", THREADS_EXIT
+    END
+#else
+  THREADS_POPUP MENU
+    BEGIN
+      MENUITEM "New" THREADS_NEW
+      MENUITEM "Exit" THREADS_EXIT
+    END
+#endif
+
+STRINGTABLE
+  BEGIN
+    THREAD_RESUME "Resume"
+  END
+
+#ifdef IC_PM
+  MENU THREAD_POPUP
+    BEGIN
+      MENUITEM "Show",                  THREAD_SHOW
+      MENUITEM "Suspend",               THREAD_SUSPEND
+      MENUITEM "Stop",                  THREAD_STOP
+      MENUITEM "Enter/Exit CritSec",    THREAD_CRITSEC
+      SUBMENU "Resources",              1
+        BEGIN
+          SUBMENU "Private",            1
+            BEGIN
+              MENUITEM "Acquire",       THREAD_GETPRIVATE
+              MENUITEM "Release",       THREAD_RELPRIVATE
+            END
+          SUBMENU "Shared",             2
+            BEGIN
+              MENUITEM "Acquire",       THREAD_GETSHARED
+              MENUITEM "Release",       THREAD_RELSHARED
+            END
+        END
+      SUBMENU "Signal",                 2
+        BEGIN
+          SUBMENU "Private",            1
+            BEGIN
+              MENUITEM "Reset",         THREAD_RESETPRIVATE
+              MENUITEM "Signal",        THREAD_SIGNALPRIVATE
+              MENUITEM "Wait",          THREAD_WAITPRIVATE
+            END
+          SUBMENU "Shared",             2
+            BEGIN
+              MENUITEM "Reset",         THREAD_RESETSHARED
+              MENUITEM "Signal",        THREAD_SIGNALSHARED
+              MENUITEM "Wait",          THREAD_WAITSHARED
+            END
+        END
+      SUBMENU "Priority level",         3
+        BEGIN
+          MENUITEM "Boost",             THREAD_BOOST
+          MENUITEM "Reduce",            THREAD_REDUCE
+        END
+      SUBMENU "Set priority class",     4
+        BEGIN
+          MENUITEM "Idle",              THREAD_IDLE
+          MENUITEM "Regular",           THREAD_REGULAR
+          MENUITEM "Time critical",     THREAD_TIMECRIT
+          MENUITEM "Foreground server", THREAD_FORE
+        END
+    END
+#else
+  THREAD_POPUP MENU
+    BEGIN
+      MENUITEM "Show"                   THREAD_SHOW
+      MENUITEM "Suspend"                THREAD_SUSPEND
+      MENUITEM "Stop"                   THREAD_STOP
+      MENUITEM "Enter/Exit CritSec"     THREAD_CRITSEC
+      POPUP "Resources"
+        BEGIN
+          POPUP "Private"
+            {
+              MENUITEM "Acquire"        THREAD_GETPRIVATE
+              MENUITEM "Release"        THREAD_RELPRIVATE
+            }
+          POPUP "Shared"
+            {
+              MENUITEM "Acquire"        THREAD_GETSHARED
+              MENUITEM "Release"        THREAD_RELSHARED
+            }
+        }
+      POPUP "Signal"
+        {
+          POPUP "Private"
+            {
+              MENUITEM "Reset"          THREAD_RESETPRIVATE
+              MENUITEM "Signal"         THREAD_SIGNALPRIVATE
+              MENUITEM "Wait"           THREAD_WAITPRIVATE
+            }
+          POPUP "Shared"
+            {
+              MENUITEM "Reset"          THREAD_RESETSHARED
+              MENUITEM "Signal"         THREAD_SIGNALSHARED
+              MENUITEM "Wait"           THREAD_WAITSHARED
+            }
+        }
+      POPUP "Priority level"
+        {
+          MENUITEM "Boost"              THREAD_BOOST
+          MENUITEM "Reduce"             THREAD_REDUCE
+        }
+      POPUP "Set priority class"
+        {
+          MENUITEM "Idle"               THREAD_IDLE
+          MENUITEM "Regular"            THREAD_REGULAR
+          MENUITEM "Time critical"      THREAD_TIMECRIT
+          MENUITEM "Foreground server"  THREAD_FORE
+        }
+    END
+#endif

@@ -1,0 +1,22 @@
+## Notebook Control - Default Notebook
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL :  CREATEDIR  $(ODIR)\default.exe
+
+$(ODIR)\default.exe :  $(ODIR)\default.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\default.exe $(ODIR)\default.obj
+
+$(ODIR)\default.obj: default.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\default.obj  default.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

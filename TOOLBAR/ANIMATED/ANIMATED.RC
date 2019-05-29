@@ -1,0 +1,23 @@
+/************************************************************
+/ Tool Bars - Animated Button Example
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include "animated.h"
+
+#ifdef IC_PM
+  #include <os2.h>
+  BITMAP  ID_CIRCLE1    circle1.bmp
+  BITMAP  (ID_CIRCLE1+1)  circle2.bmp
+  BITMAP  (ID_CIRCLE1+2)  circle3.bmp
+  BITMAP  (ID_CIRCLE1+3)  circle4.bmp
+#else /* Windows resources */
+  ID_CIRCLE1    BITMAP  circle1.bmp
+  ID_CIRCLE1+1  BITMAP  circle2.bmp
+  ID_CIRCLE1+2  BITMAP  circle3.bmp
+  ID_CIRCLE1+3  BITMAP  circle4.bmp
+#endif
+
+

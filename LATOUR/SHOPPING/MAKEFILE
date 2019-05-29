@@ -1,0 +1,44 @@
+## Tour of the UICL - Shopping List Example Program
+
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+LIBS =
+
+!ifdef IC_PM
+ODIR=.\os2
+ORES=$(ODIR)\shopping.res
+RC=rc.exe -DIC_PM
+!else
+ODIR=.\win
+ORES=
+RC=irc.exe -Fo$(ODIR)\shopping.res
+!endif
+
+
+ALL : CREATEDIR  $(ODIR)\shopping.exe
+
+$(ODIR)\shopping.exe :  $(ODIR)\shopping.obj $(ODIR)\shopping.res $(ODIR)\puritem.obj $(ODIR)\puritemv.obj
+!ifdef IC_PM
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\shopping.exe $(ODIR)\shopping.obj $(ODIR)\puritem.obj $(ODIR)\puritemv.obj
+   $(RC) $(ODIR)\shopping.res  $(ODIR)\shopping.exe
+!else
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\shopping.exe  $(ODIR)\shopping.obj $(ODIR)\puritem.obj $(ODIR)\puritemv.obj $(ODIR)\shopping.res
+!endif
+
+$(ODIR)\puritemv.obj: puritemv.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\puritemv.obj  puritemv.cpp
+
+$(ODIR)\puritem.obj: puritem.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\puritem.obj  puritem.cpp
+
+$(ODIR)\shopping.obj: shopping.cpp shopping.h
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\shopping.obj  shopping.cpp
+
+$(ODIR)\shopping.res:  shopping.rc shopping.h
+   $(RC) -r shopping.rc $(ORES)
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+
+

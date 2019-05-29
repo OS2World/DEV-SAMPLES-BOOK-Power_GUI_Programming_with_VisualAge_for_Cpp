@@ -1,0 +1,22 @@
+## Canvas - IViewPort with Logically-sized View Window
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\vportlog.exe
+
+$(ODIR)\vportlog.exe : $(ODIR)\vportlog.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\vportlog.exe $(ODIR)\vportlog.obj
+
+$(ODIR)\vportlog.obj: vportlog.cpp vportlog.hpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\vportlog.obj vportlog.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

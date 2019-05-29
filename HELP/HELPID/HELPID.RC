@@ -1,0 +1,41 @@
+/*************************************************************
+/ Using Help - Runtime Setting of Help Panels
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+*************************************************************/
+#include "helpid.h"
+
+#ifdef IC_PM /* OS/2 resources */
+
+#include <os2.h>
+
+MENU ID_MENUBAR
+{
+  SUBMENU "~File",           ID_FILE
+  {
+    MENUITEM "Choice 1",     ID_CHOICE1
+    MENUITEM "Choice 2",     ID_CHOICE2
+    MENUITEM SEPARATOR
+    MENUITEM "Close",        ID_CLOSE,     MIS_SYSCOMMAND
+  }
+}
+
+#else /* Windows resources */
+
+#include <windows.h>
+
+ID_MENUBAR MENUEX
+{
+  POPUP "&File"              ID_FILE
+  {
+    MENUITEM "Choice 1",     ID_CHOICE1
+    MENUITEM "Choice 2",     ID_CHOICE2
+    MENUITEM SEPARATOR
+    MENUITEM "Close",        ID_CLOSE
+  }
+}
+
+#endif
+

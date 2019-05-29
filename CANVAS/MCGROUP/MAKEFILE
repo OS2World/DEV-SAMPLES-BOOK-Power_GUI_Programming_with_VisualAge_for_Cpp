@@ -1,0 +1,22 @@
+## Canvas - IMultiCellCanvas with Smarter Group Boxes
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\mcgroup.exe
+
+$(ODIR)\mcgroup.exe : $(ODIR)\mcgroup.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\mcgroup.exe $(ODIR)\mcgroup.obj
+
+$(ODIR)\mcgroup.obj: mcgroup.cpp mcgroup.hpp pushbtns.hpp mcgroup.h
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\mcgroup.obj mcgroup.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

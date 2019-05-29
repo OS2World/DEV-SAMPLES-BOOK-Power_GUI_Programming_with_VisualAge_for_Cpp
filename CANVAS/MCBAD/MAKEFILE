@@ -1,0 +1,23 @@
+## Canvas - Multicell Canvas without Expandable Rows/Columns
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\mcbad.exe
+
+$(ODIR)\mcbad.exe : $(ODIR)\mcbad.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\mcbad.exe $(ODIR)\mcbad.obj
+
+$(ODIR)\mcbad.obj: mcbad.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\mcbad.obj mcbad.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

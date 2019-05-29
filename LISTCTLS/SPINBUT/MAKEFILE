@@ -1,0 +1,28 @@
+## List Controls - Spin Button Date Control
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+LIBS =
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+ORES=
+!endif
+
+
+ALL : CREATEDIR  $(ODIR)\spinbut.exe
+
+$(ODIR)\spinbut.exe :  $(ODIR)\spinbut.obj $(ODIR)\datectrl.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\spinbut.exe  $(ODIR)\spinbut.obj $(ODIR)\datectrl.obj
+
+$(ODIR)\datectrl.obj: datectrl.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\datectrl.obj  datectrl.cpp
+
+$(ODIR)\spinbut.obj: spinbut.cpp datectrl.hpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\spinbut.obj  spinbut.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

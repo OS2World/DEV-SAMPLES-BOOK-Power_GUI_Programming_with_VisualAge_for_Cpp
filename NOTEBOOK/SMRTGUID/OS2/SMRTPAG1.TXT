@@ -1,0 +1,5 @@
+SmartGuides are used to help you choose the appropriate information for an application.  They can also serve as a tutorial to give users needed information about a product.  The choices made on each page determine what page is displayed next.  Often, applications provide a Novice or Expert choice that determines if the user is led step by step through a process or merely prompted for pertinent information with entry fields, combo boxes, radio buttons and more.
+
+When all the choices are completed, you select the Done push button and the notebook is closed and the choices are saved and processed.  You can also select the Cancel push button to close the SmartGuide without saving your changes.
+
+This sample is very simplistic in order to demonstrate how to use a SmartGuide in your application.  You select if you want a log file and that choice determines the path the SmartGuide takes.

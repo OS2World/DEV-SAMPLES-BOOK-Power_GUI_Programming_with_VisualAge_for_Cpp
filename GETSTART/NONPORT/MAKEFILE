@@ -1,0 +1,23 @@
+## Getting Started - Using Platform-Specifc Code
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\nonport.exe
+
+$(ODIR)\nonport.exe : $(ODIR)\nonport.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\nonport.exe $(ODIR)\nonport.obj
+
+$(ODIR)\nonport.obj: nonport.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\nonport.obj nonport.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

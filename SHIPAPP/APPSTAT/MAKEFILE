@@ -1,0 +1,45 @@
+## Packaging and Performance Tuning - Static Objects
+
+CFLAGS = /Ft- /Gd+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:VIO
+
+!ifdef IC_PM
+ODIR=.\os2
+RC=rc.exe -DIC_PM
+RCOUT=
+!else
+ODIR=.\win
+RC=irc.exe
+RCOUT=-Fo
+!endif
+ORES=$(ODIR)\myeng.res
+
+
+ALL :  CREATEDIR  $(ODIR)\appstat.exe $(ODIR)\myeng.dll
+
+$(ODIR)\appstat.exe : $(ODIR)\main.obj $(ODIR)\appstat.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$@ $**
+
+$(ODIR)\myeng.dll : $(ODIR)\dummy.obj $(ODIR)\myeng.res myeng.def
+!ifdef IC_PM
+   icc $(CFLAGS) /B"$(LFLAGS) /DLL" /Fe$@ $(ODIR)\dummy.obj myeng.def
+   $(RC) $(ODIR)\myeng.res $@
+!else
+   icc $(CFLAGS) /B"$(LFLAGS) /DLL" /Fe$@ $(ODIR)\dummy.obj $(ODIR)\myeng.res
+!endif
+
+$(ODIR)\main.obj: main.cpp mytext.h appstat.hpp
+   icc $(CFLAGS) /C+ /Fo$@ $(@B).cpp
+
+$(ODIR)\appstat.obj: appstat.cpp appstat.hpp
+   icc $(CFLAGS) /C+ /Fo$@ $(@B).cpp
+
+$(ODIR)\dummy.obj: dummy.c
+   icc $(CFLAGS) /C+ /Fo$@ $(@B).c
+
+$(ORES): myeng.rc mytext.h
+   $(RC) -r $(@B).rc $(RCOUT)$@
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

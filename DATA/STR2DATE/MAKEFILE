@@ -1,0 +1,22 @@
+## Data Types - Creating Dates and Times from IStrings 
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS =
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR   $(ODIR)\str2date.exe
+
+$(ODIR)\str2date.exe :  $(ODIR)\str2date.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\str2date.exe $(ODIR)\str2date.obj
+
+$(ODIR)\str2date.obj: str2date.cpp
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\str2date.obj  str2date.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

@@ -1,0 +1,23 @@
+/************************************************************
+/ Problem Determination  - Trace Queue Browser
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+
+#include "filtdlg.h"
+
+STRINGTABLE
+  BEGIN
+    FLTD_DIALOG   ,  "Filter dialog"
+    FLTD_EXCLUDE  ,  "Exclude items in list"
+    FLTD_LABEL0   ,  "Include only items containing:"
+    FLTD_LABEL1   ,  "Exclude items containing:"
+    FLTD_ADD      ,  "Add >>"
+    FLTD_REMOVE   ,  "Remove <<"
+    FLTD_OK       ,  "OK"
+    FLTD_CANCEL   ,  "Cancel"
+  END
+
+

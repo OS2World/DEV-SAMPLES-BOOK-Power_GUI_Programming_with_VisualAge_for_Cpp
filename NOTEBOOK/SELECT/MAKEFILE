@@ -1,0 +1,35 @@
+## Notebook Control - Delayed Page Loading
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+
+!ifdef IC_PM
+ODIR=.\os2
+ORES=$(ODIR)\select.res
+RC=rc.exe -DIC_PM
+!else
+ODIR=.\win
+ORES=
+RC=irc.exe -Fo$(ODIR)\select.res
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\select.exe
+
+$(ODIR)\select.exe :  $(ODIR)\select.obj $(ODIR)\select.res
+!ifdef IC_PM
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\select.exe $(ODIR)\select.obj
+   $(RC) $(ODIR)\select.res  $(ODIR)\select.exe
+!else
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\select.exe  $(ODIR)\select.obj $(ODIR)\select.res
+!endif
+
+$(ODIR)\select.obj: select.cpp select.h
+   icc $(CFLAGS) /C+  /Fo$(ODIR)\select.obj  select.cpp
+
+$(ODIR)\select.res:  select.rc select.h
+   $(RC) -r select.rc $(ORES)
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

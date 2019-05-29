@@ -1,0 +1,25 @@
+## Reusable Handlers - Paint Handler
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+ODIR=.\os2
+LIBS=
+!else
+ODIR=.\win
+LIBS=user32.lib
+!endif
+
+
+ALL :  CREATEDIR  $(ODIR)\painthdr.exe
+
+$(ODIR)\painthdr.exe : $(ODIR)\painthdr.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\painthdr.exe $(ODIR)\painthdr.obj $(LIBS)
+
+$(ODIR)\painthdr.obj: painthdr.cpp
+   icc $(CFLAGS) /C+ /Fo$(ODIR)\painthdr.obj painthdr.cpp
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
+

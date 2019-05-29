@@ -1,0 +1,49 @@
+## Problem Determination  - Trace Queue Browser
+
+CFLAGS = /Ft- /Gd+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS = /PM:PM
+
+!ifdef IC_PM
+LIBS =
+ODIR=.\os2
+RC=rc.exe -DIC_PM
+RCOUT=
+!else
+LIBS = user32.lib
+ODIR=.\win
+RC=irc.exe
+RCOUT=-Fo
+!endif
+ORES=$(ODIR)\trbrowse.res
+
+
+ALL :  CREATEDIR  $(ODIR)\tracebox.exe
+
+$(ODIR)\tracebox.exe : $(ODIR)\tracebox.obj \
+                       $(ODIR)\trbrowse.obj \
+                       $(ODIR)\querdr.obj   \
+                       $(ODIR)\filtdlg.obj  \
+                       $(ORES)
+!ifdef IC_PM
+   icc $(CFLAGS) /B"$(LFLAGS)" $(LIBS) /Fe$@ $(ODIR)\tracebox.obj $(ODIR)\trbrowse.obj $(ODIR)\querdr.obj $(ODIR)\filtdlg.obj
+   $(RC) $(ORES) $@
+!else
+   icc $(CFLAGS) /B"$(LFLAGS)" $(LIBS) /Fe$@ $**
+!endif
+
+tracebox.cpp : trbrowse.hpp querdr.hpp filtdlg.hpp
+
+trbrowse.cpp : trbrowse.hpp trbrowse.h querdr.hpp filtdlg.hpp
+
+querdr.cpp   : querdr.hpp   filtdlg.hpp trbrowse.h
+
+filtdlg.cpp  : filtdlg.hpp filtdlg.h
+
+{.}.cpp{$(ODIR)}.obj:
+   icc $(CFLAGS) /C+ /Fo$@ $(@B).cpp
+
+$(ORES): trbrowse.rc filtdlg.rc trbrowse.h filtdlg.h $(ODIR)\osfindr.ico
+   $(RC) -r $(@B).rc $(RCOUT)$@
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)

@@ -1,0 +1,31 @@
+/************************************************************
+/ Advanced Frame - MDI Frame Example
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include "mdi.h"
+
+WND_MAIN          ICON       .\win\app.ico
+MI_FIRSTCHILD     ICON       .\win\view.ico
+
+WND_MAIN  MENUEX
+  BEGIN
+    POPUP         "&File"                 , MI_FILE
+      BEGIN
+        MENUITEM  "&Open..."              , MI_OPEN
+        MENUITEM  "&Close"                , MI_CLOSE
+        MENUITEM  SEPARATOR
+        MENUITEM  "E&xit"                 , MI_EXIT
+      END
+    POPUP         "&Windows"              , MI_WINDOWS
+      BEGIN
+        MENUITEM  "&Cascade"              , MI_CASCADE
+        MENUITEM  "Tile &Horizontally"    , MI_TILEH
+        MENUITEM  "&Tile Vertically"      , MI_TILEV
+        MENUITEM  "&Arrange Icons"        , MI_ARRANGE
+      END
+  END
+
+

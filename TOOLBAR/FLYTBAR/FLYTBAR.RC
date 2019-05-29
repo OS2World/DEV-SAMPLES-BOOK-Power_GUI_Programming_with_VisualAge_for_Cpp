@@ -1,0 +1,39 @@
+/************************************************************
+/ Tool Bar - Tool Bar Fly-over Help Example   
+/
+/ Copyright (C) 1994, Law, Leong, Love, Olson, Tsuji.
+/ Copyright (c) 1997 John Wiley & Sons, Inc. 
+/ All Rights Reserved.
+************************************************************/
+#include <icconst.h>
+#include "flytbar.h"
+
+
+STRINGTABLE PRELOAD       
+BEGIN
+   ID_EDITTOOLBAR,                 ""
+   ID_EDITTOOLBAR+FLYTEXT_OFFSET,  "Editing Tools"
+   ID_EDITTOOLBAR+LONGTEXT_OFFSET, "Tools used to transfer data to and from the clipboard"
+   IC_ID_CUT,                  "Cut" 
+   IC_ID_COPY,                 "Copy" 
+   IC_ID_PASTE,                "Paste" 
+   IC_ID_CUT+FLYTEXT_OFFSET,   "Cut selected text to clipboard" 
+   IC_ID_COPY+FLYTEXT_OFFSET,  "Copy selected test to clipboard" 
+   IC_ID_PASTE+FLYTEXT_OFFSET, "Paste from clipboard to cursor" 
+   IC_ID_CUT+LONGTEXT_OFFSET,   "Removes text with selection emphasis from document and stores it in the system clipboard." 
+   IC_ID_COPY+LONGTEXT_OFFSET,  "Copies text with selection emphasis from document and stores it in the system clipboard."
+   IC_ID_PASTE+LONGTEXT_OFFSET, "Pastes text from the system clipboard to the cursor location in the document."
+   ID_LAUNCHTOOLBAR,                 ""
+   ID_LAUNCHTOOLBAR+FLYTEXT_OFFSET,  "Start external applications"
+   ID_LAUNCHTOOLBAR+LONGTEXT_OFFSET, "Starts tools that run outside of the document."
+   ID_LAUNCHWEB,                "Web Browser"
+   ID_LAUNCHWEB+FLYTEXT_OFFSET  "Press to Start Web Browser"
+   ID_LAUNCHWEB+LONGTEXT_OFFSET "Press to start web browser"
+END
+
+#ifdef IC_PM /* PM resources */
+BITMAP  ID_LAUNCHWEB    web.bmp
+
+#else   /* Windows resources */
+ID_LAUNCHWEB  BITMAP    web.bmp
+#endif

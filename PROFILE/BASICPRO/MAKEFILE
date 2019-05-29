@@ -1,0 +1,24 @@
+## Profile - Basic Profile Example
+
+CFLAGS = /Ft- /Gd+ /Ge+ /Gm+ /Wall+gnr-ppc-ppt-uni-vft-
+LFLAGS =
+
+!ifdef IC_PM
+ODIR=.\os2
+!else
+ODIR=.\win
+!endif
+
+
+ALL : CREATEDIR $(ODIR)\basicpro.exe
+
+$(ODIR)\basicpro.exe :  $(ODIR)\basicpro.obj
+   icc $(CFLAGS) /B"$(LFLAGS)" /Fe$(ODIR)\basicpro.exe  $(ODIR)\basicpro.obj
+
+
+$(ODIR)\basicpro.obj :  basicpro.cpp
+  icc $(CFLAGS) /C+  /Fo$(ODIR)\basicpro.obj  basicpro.cpp
+
+
+CREATEDIR:
+  @if not exist $(ODIR)* md $(ODIR)
